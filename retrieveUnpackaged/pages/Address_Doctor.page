@@ -1,0 +1,166 @@
+<apex:page id="pg" Controller="newValidateAddress" showHeader="false" sidebar="false" tabStyle="Account">
+
+
+   <head>
+    <script type="text/javascript" >
+    
+     function doSave() {
+       //     for(var j = 0 ; j < size ; j++){
+           //     try{  
+                    
+                    var ein =document.getElementById('pg:theForm:pgblock:pgSection1:ein').value;
+                    var duns =document.getElementById('pg:theForm:pgblock:pgSection1:duns').value;
+                    var name =document.getElementById('pg:theForm:pgblock:pgSection2:aname').value;
+                   
+                     var address1 =document.getElementById('pg:theForm:pgblock:pgSection2:aaddress1').value;
+                     var city =document.getElementById('pg:theForm:pgblock:pgSection2:acity').value;
+                     var state =document.getElementById('pg:theForm:pgblock:pgSection2:astate').value;
+                     var zip =document.getElementById('pg:theForm:pgblock:pgSection2:azip').value;
+                     var phone =document.getElementById('pg:theForm:pgblock:pgSection2:aphone').value;
+                     var email =document.getElementById('pg:theForm:pgblock:pgSection3:aemail').value;
+                     var legalname =document.getElementById('pg:theForm:pgblock:pgSection3:aLegalName').value;
+                     var indirectcostrate =document.getElementById('pg:theForm:pgblock:pgSection3:aIndirectCostRate').value;
+                    //alert(officeLoc);
+                     if(ein=='' || duns=='' || name=='' || address1=='' || city=='' || state=='' || zip=='' || phone=='' || email=='' || legalname=='' || indirectcostrate==''){
+                      alert('Required field is missing');
+                        
+                    }
+                  //  }
+             //    }catch(error){
+                //     alert(error);
+                // }
+       //      }
+     }
+    
+    </script>
+
+  </head>
+
+    <apex:form id="theForm">       
+        <apex:actionFunction name="Redirect" action="{!PageRedirect}" rerender="tstpopup"/>
+        
+        <apex:pageBlock id="pgblock" title="Enter Organization Information">                
+           <apex:pageBlockSection id="pgSection1" columns="1" title="Organization Information" >
+               <apex:inputfield id="ein" value="{!AccountInput.EIN__c}" required="true"></apex:inputfield>
+              <!-- <a href="#" data-toggle="tooltip" title="DUNS number must be entered for your organization in order to submit an application. If needed please contact Dun & Bradstreet at http://www.dnb.com/get-a-duns-number.html to register for a DUNS number.">{!$ObjectType.Account.fields.DUNS__c.label}</a> -->
+                     <apex:inputfield id="duns" value="{!AccountInput.DUNS__c}" required="true"></apex:inputfield> 
+                
+               
+             
+              
+           </apex:pageBlockSection>
+           <apex:pageBlockSection id="pgSection2" columns="1" title="Organization Contact Information">
+                <apex:inputfield id="aname" value="{!AccountInput.Name}" />
+                <apex:inputfield id="aaddress1" value="{!AccountInput.Address_1__c}" required="true" ></apex:inputfield>
+                <apex:inputfield id="aaddress2" value="{!AccountInput.Address_2__c}" ></apex:inputfield>
+                <apex:inputfield id="acity" value="{!AccountInput.City__c}" required="true"></apex:inputfield>
+                <apex:inputfield id="astate" value="{!AccountInput.States__c}" required="true"></apex:inputfield>
+                <apex:inputfield id="azip" value="{!AccountInput.Zip1__c}" required="true"></apex:inputfield>
+                <apex:inputfield id="aphone" value="{!AccountInput.Phone__c}" required="true"></apex:inputfield>
+                </apex:pageBlockSection>
+               <apex:pageBlockSection id="pgSection3" Title="OTHER">
+            <!--   <apex:inputfield id="aemail" value="{!AccountInput.Eamil__c}" required="True"></apex:inputfield>
+               <apex:inputfield id="aLegalName" value="{!AccountInput.Organization_Legal_Name__c}" required="True" ></apex:inputfield>-->
+               <apex:inputfield id="aIndirectCostRate" value="{!AccountInput.Do_you_have_anIndirect_Cost_Rate__c }" required="True"></apex:inputfield>
+               <apex:inputfield value="{!AccountInput.Rate_Type__c}" required="True" ></apex:inputfield>
+              
+               </apex:pageBlockSection>
+               
+           
+           <apex:pageBlockSection >
+            <!--    <apex:pageBlockSectionItem >
+                   <apex:commandbutton value="CANCEL" action="{!cancel}" style="height:30px;width:150px;color:black;border:3px solid white;border-shadow:3px;"/> 
+                    <apex:outputText value=""/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value=""/>
+                    <apex:commandbutton value="CREATE" action="{!Save}" style="height:30px;width:150px;color:black;border:3px solid white;border-shadow:3px;font-weight:bold"/>
+                  
+                </apex:pageBlockSectionItem>  -->      
+                  
+           </apex:pageBlockSection>  
+           
+           
+           
+             <apex:commandButton value="Validate Address" onclick="if (doSave() == false) { return false; }" action="{!PageRedirect}" rerender="tstpopup"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <!--   <apex:commandButton value="Validate Address" onClick="javascript:return doSave(this)" /> -->
+             
+      </apex:pageBlock> 
+      
+         
+      <apex:pageBlock >
+      
+    <!--  <apex:commandButton value="Show Pop up" action="{!showPopup}" rerender="tstpopup"/>
+        <apex:pageBlock >
+            This is just filler text from the Salesforce General.
+        </apex:pageBlock> -->
+ 
+        <apex:outputPanel id="tstpopup">       
+        <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/> 
+        <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">
+                
+      <apex:pageBlock rendered="{!displayPopup}">
+        <apex:pageMessages id="showmsg"/>
+            <apex:pageBlockSection title="Addresses" columns="2" collapsible="false"> 
+                    <apex:panelGroup >  
+                   <!--   <apex:outputLabel value="Old Address"/><br> </br> -->
+                      Old Address <br> </br>
+                      <apex:outputText value="{!AccountInput.Address_1__c}"/>
+                       <apex:outputText value="{!AccountInput.City__c}"/>
+                   </apex:panelGroup>
+                    
+                      New Address Suggestions <br> </br>
+                    <apex:pageBlockSectionItem >
+                    <apex:facet name="header"><b>Address Suggestions</b></apex:facet> 
+                      <apex:selectRadio value="{!Address}" layout="pageDirection">
+                      
+                        <apex:selectOptions value="{!options}"/><br/>
+                      </apex:selectRadio>
+                    </apex:pageBlockSectionItem>
+            </apex:pageBlockSection> 
+        </apex:pageBlock>
+    
+        <apex:commandButton value="Use Old Address" action="{!save}" />
+        <apex:commandButton value="Use New Address" action="{!Submit}" rerender="showmsg" status="status"/>
+   
+               <apex:commandButton value="Cancel" action="{!closePopup}" rerender="tstpopup"/>
+            </apex:outputPanel>
+        </apex:outputPanel>
+     
+     
+    </apex:pageBlock> 
+   </apex:form>
+   
+   <style type="text/css">
+        .custPopup{
+            background-color: white;
+            border-width: 2px;
+            border-style: solid;
+            z-index: 9999;
+            left: 50%;
+            padding:10px;
+            position: absolute;
+            /* These are the 3 css properties you will need to change so the popup
+            displays in the center of the screen. First set the width. Then set
+            margin-left to negative half of what the width is. You can add
+            the height property for a fixed size pop up if you want.*/
+            width: 700px;
+            margin-left: -250px;
+            top:150px;
+        }
+        .popupBackground{
+            background-color:black;
+            opacity: 0.20;
+            filter: alpha(opacity = 20);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+        }
+
+    </style> 
+   
+   
+</apex:page>

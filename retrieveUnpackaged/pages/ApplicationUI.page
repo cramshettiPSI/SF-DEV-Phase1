@@ -1,0 +1,670 @@
+<apex:page STAndardController="Application3__c" title="New Application" extensions="RecordTypeExtension" sidebar="False">
+ <style type="text/css">
+        .myClass { width: 135px; 
+             border: 3px solid;
+             color: #b30000; }
+    </style>
+  <apex:form id="theForm">
+     <apex:pageBlock title="Application Edit" mode="edit">
+     <apex:pageMessages />
+            <apex:pageBlockButtons >
+    <apex:commandButton value="Submit" action="{!Save}"/>
+   <apex:commandButton value="Save" action="{!SaveAsDraft}"/>
+     <apex:commandButton value="Cancel" action="{!cancel}"/>
+                </apex:pageBlockButtons>
+ <apex:pageBlockSection collapsible="true" Title="Applicant Information" columns="2">
+  <apex:inputField value="{!applicationInput.NOFA_RFP__c}"/>
+    <apex:inputField value="{!applicationInput.NOFA_Name__c}"/>
+ <!--<apex:inputField value="{!applicationInput.Name}" required="false"/>-->
+              <apex:outputField value="{!applicationInput.Type_of_Submission__c}"  style="width:38%;"/>
+              
+              <apex:inputField value="{!applicationInput.Date_Received__c}" />
+            
+                <apex:actionRegion >
+                            
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:outputLabel value=" Type of Application "  />
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:inputField value="{!applicationInput.Type_of_Application__c}">&nbsp;&nbsp;
+              <apex:actionSupport event="onchange" reRender="pgsecdoc"/>
+             </apex:inputField>
+               
+           </apex:actionRegion>
+         
+        <!-- <apex:selectList value="{!applicationInput.Type_of_Application__c}" multiselect="false" size="1" required="True">
+           <apex:selectOption itemValue="None" itemLabel="--None--"/>
+                <apex:selectOption itemValue="new" itemLabel="New"/>
+                <apex:selectOption itemValue="continuation" itemLabel="Continuation"/>
+                <apex:selectOption itemValue="Revision" itemLabel="Revision"/>
+            </apex:selectList>
+                      <apex:selectList value="{!applicationInput.Option__c}" multiselect="false" size="1" required="True">
+           <apex:selectOption itemValue="Increase Award" itemLabel="A. Increase Award"/>
+                <apex:selectOption itemValue="BDecrease Award" itemLabel="B. Decrease Award"/>
+                <apex:selectOption itemValue="Increase Duration" itemLabel="C.Increase Duration"/>
+                <apex:selectOption itemValue="Decrease Duration" itemLabel="D. Decrease Duration"/>
+                 <apex:selectOption itemValue="Other" itemLabel="E. Other (specify)"/>
+                  </apex:selectList>-->
+ <apex:inputField value="{!applicationInput.State_Application_Identifier__c}" style="width:38%;"/>
+ <apex:inputField value="{!applicationInput.Option__c}" style="width:32%;"/>
+
+ <apex:inputField value="{!applicationInput.Applicant_Delinquent_on_any_Federal_Debt__c}" style="width:38%;"/>
+  <apex:inputTextarea value="{!applicationInput.Additional_Information__c}" style="width: 150px; height: 25px"/>
+  <apex:inputField value="{!applicationInput.If_Yes_provide_your_explination_here__c}" style="width: 150px; height: 25px"/>
+ <apex:outputField value="{!applicationInput.Review_by_State_Under_Executive_Order__c}" style="width:38%;"/>
+ <apex:inputField value="{!applicationInput.Date_Received_by_State__c}"/>
+ 
+ <!--<apex:inputField value="{!applicationInput.Applicant_Identifier__c}"/> -->
+ <!--<apex:inputField value="{!applicationInput.Project__c}"/>  -->
+ <!--<apex:inputField value="{!applicationInput.Status__c}" style="width:38%;"/> -->
+  </apex:pageBlockSection>
+  
+  <!--shamli-->
+   
+   <!--  <apex:pageBlockSection title="Organization Information" columns="2">
+ 
+<apex:inputField value="{!applicationInput.Street_1__c}" required="true"/>
+<apex:inputField value="{!applicationInput.Street_2__c}" required="false"/>
+<apex:inputField value="{!applicationInput.City__c}" required="true"/>
+<apex:inputField value="{!applicationInput.State__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Zip_Postal_Code__c}" required="true"/>
+<apex:inputField value="{!applicationInput.Country__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Department_Name__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Division_Name__c}" required="false"/>
+</apex:pageBlockSection>
+ -->
+<apex:pageBlockSection title="Organization Contact Information" columns="2">
+<apex:inputField value="{!applicationInput.Prefix__c}" styleClass="myClass"/ >
+<apex:inputField value="{!applicationInput.Organizational_Affiliation__c}" styleClass="myClass"/>
+<apex:inputField value="{!applicationInput.First_Name__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Title__c}" required="false" />
+<apex:inputField value="{!applicationInput.Middle_Name__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Telephone_Number__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Last_Name__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Email__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Suffix__c}" required="false"/>
+
+
+
+</apex:pageBlockSection>
+
+ <apex:pageBlockSection collapsible="true" Title="Project/Program Information" columns="1">
+  <!--  <apex:inputField value="{!applicationInput.CFDA_Number__c}"/>
+      
+        <apex:inputField value="{!applicationInput.NOFA_Due_Date__c}"/>
+       -->
+      
+       
+      
+         
+  
+ <!-- <apex:inputField value="{!applicationInput.Date__c}"/> -->
+ <!-- <apex:inputField value="{!applicationInput.Program_Director__c}" style="width: 143px; height: 23px"/> -->
+ <!-- <apex:inputField value="{!applicationInput.State_Application_Identifier__c}"/>-->
+  <!--<apex:inputField value="{!applicationInput.Program_Site_URL__c}"/> -->
+  
+  <apex:inputField value="{!applicationInput.Areas_Affected_by_Project_Cities_Coutn__c}" style="width: 280px; height: 65px"/>
+ 
+  <!--<apex:inputField value="{!applicationInput.Project_Program_Title__c}" style="width:38%;"/>-->
+  <apex:inputField value="{!applicationInput.Proposed_Start_Date__c}"/>
+  <apex:inputField value="{!applicationInput.Proposed_End_Date__c}"/>
+  
+  
+   </apex:pageBlockSection>
+  
+
+<!--
+<apex:pageBlockSection title="Type of Applicant" columns="1">
+<apex:inputField value="{!applicationInput.Type_of_Applicant__c}" required="false" style="width:18%;"/>
+<apex:inputField value="{!applicationInput.Descriptive_Title_of_Applicant_s_Project__c}" required="false"/>
+</apex:pageBlockSection> -->
+  <!--   
+ <apex:pageBlockSection title="Competition Identification Number/Title" columns="2">
+<apex:inputField value="{!applicationInput.Community_Advisory_Name_and_Addresses__c}" required="false" style="width:50%;"/>
+<apex:inputField value="{!applicationInput.Funding_Opportunity_Title__c}" required="false"/>
+</apex:pageBlockSection>
+     
+ <apex:pageBlockSection title="Proposed Project" columns="2">
+<apex:inputField value="{!applicationInput.Start_Date__c}" required="true"/>
+<apex:inputField value="{!applicationInput.End_Date__c}" required="true"/>
+</apex:pageBlockSection>
+
+
+<apex:pageBlockSection title="Estimated Funding" columns="2">
+<apex:inputField value="{!applicationInput.Federal__c}" required="true"/>
+<apex:inputField value="{!applicationInput.Applicant1__c}" required="true"/>
+<apex:inputField value="{!applicationInput.State1__c}" required="true"/>
+<apex:inputField value="{!applicationInput.Local__c}" required="true"/>
+<apex:inputField value="{!applicationInput.Program_Income__c}" required="true"/>
+</apex:pageBlockSection>
+-->
+<!--State and National-->
+
+
+    <apex:pageBlock rendered="{!rectypename=='AmeriCorp State and National'}">
+            <apex:pageBlockSection collapsible="true" Title="Narratives" columns="1">
+            <apex:inputField value="{!applicationInput.Executive_Summary__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Rationale_and_Approach__c}" required="false" style="width:50%;"/>
+            <apex:inputField value="{!applicationInput.Program_Design__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Organization_Capability__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Cost_Effectiveness_Budget_Adequacy__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Evaluation_Summary_or_Plan__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Amendment_Justification__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Clarification_Summary__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Continuation_Changes__c}" required="false"/>   
+        </apex:pageBlockSection>
+        <apex:pageBlockSection collapsible="true" Title="Program Information" columns="1">
+            <apex:inputField value="{!applicationInput.Opt_in_to_the_National_Service_Registry__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Received_an_AC_State_National_Grant__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Identify_the_pop_the_program_will_serve__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Select_priority_areas__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Grant_characteristics__c}" required="false" />
+        </apex:pageBlockSection>
+       
+        <apex:pageBlockSection collapsible="true" Title="Demographics" columns="2">
+                <apex:inputField value="{!applicationInput.Local_State_Federal_Government_Match__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Private_Match__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Total_Match_Dollars__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Other_Revenue__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Number_of_episodic_volunteers_generated__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.Number_of_ongoing_volunteers__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.of_Members_will_wear_AC_logo_every_day__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.to_create_deliver_elevator_speeches__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.AC_logo_will_display_on_org_s_website__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.of_MSY_who_are_opportunity_youth__c}" required="false"/>
+            <apex:inputField value="{!applicationInput.reported_in_O15_opportunity_youth__c  }" required="false"/>
+            <apex:inputField value="{!applicationInput.reported_on_O17_opportunity_youth__c}" required="false"/>
+                        <apex:inputField value="{!applicationInput.Funding_Type__c}" required="false" style="width:38%;"/>
+    
+            </apex:pageBlockSection>
+        <apex:pageBlockSection collapsible="true" Title="Indian Tribes Only" columns="1">
+       <apex:commandButton value="Attach"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection collapsible="true" Title="National Direct Only" columns="1">
+           <apex:inputField value="{!applicationInput.Funding_Type__c}" required="false"/>
+         </apex:pageBlockSection>   
+            <!--logic model-->
+            <apex:pageBlockSection title="Logical Table" id="PBSection">
+            <apex:outputPanel id="errmsg">
+            <apex:pagemessage severity="warning" title="Successfully Saved" rendered="{!displaymsg}" id="displaymsg"/>
+            <apex:pageMessages id="showmsg"/>
+            </apex:outputPanel>
+          <div align="center">  
+        <!--   <apex:commandButton value="save" action="{!save}" reRender="errmsg"/> -->
+        </div>
+           
+           <apex:dataTable value="{!LogicModelLists}" var="c" rows="4" border="8" cellspacing="10" cellpadding="10">
+         
+         
+         <tr> 
+              <apex:column headerValue="Problem">
+              <apex:inputField value="{!c.Problem__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Inputs">
+              <apex:inputField value="{!c.Inputs__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Activities">
+              <apex:inputField value="{!c.Activity__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Outputs">
+              <apex:inputField value="{!c.Outputs__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Short_Term">
+              <apex:inputField value="{!c.Short_Term__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Mid_Term">
+              <apex:inputField value="{!c.Mid_Term__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Long_Term">
+              <apex:inputField value="{!c.Long_Term__c}" style="width: 150px; height: 200px"/>
+              </apex:column> 
+         </tr> 
+          </apex:datatable>
+            <div align="center">  
+          <apex:commandButton value="Add New Row" immediate="false"  action="{!addLogicModel}" rerender="PBSection"/>
+       </div> 
+            </apex:pageBlockSection>  
+
+        
+        <apex:pageBlockSection collapsible="true" Title="Documents - National Direct Only" columns="1">
+            <apex:inputField value="{!applicationInput.Funding_Type__c}" required="false"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection collapsible="true" Title="National Education Award Only" columns="1">
+        <!--logic model-->
+         <apex:pageBlockSection title="Logical Table" id="PBSection">
+            <apex:outputPanel id="errmsg">
+            <apex:pagemessage severity="warning" title="Successfully Saved" rendered="{!displaymsg}" id="displaymsg"/>
+            <apex:pageMessages id="showmsg"/>
+            </apex:outputPanel>
+          <div align="center">  
+        <!--   <apex:commandButton value="save" action="{!save}" reRender="errmsg"/> -->
+        </div>
+           
+           <apex:dataTable value="{!LogicModelLists}" var="c" rows="4" border="8" cellspacing="10" cellpadding="10">
+         
+         
+         <tr> 
+              <apex:column headerValue="Problem">
+              <apex:inputField value="{!c.Problem__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Inputs">
+              <apex:inputField value="{!c.Inputs__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Activity">
+              <apex:inputField value="{!c.Activity__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+                 <apex:column headerValue="Outputs">
+              <apex:inputField value="{!c.Outputs__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Short_Term">
+              <apex:inputField value="{!c.Short_Term__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Mid_Term">
+              <apex:inputField value="{!c.Mid_Term__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Long_Term">
+              <apex:inputField value="{!c.Long_Term__c}" style="width: 150px; height: 200px"/>
+              </apex:column> 
+         </tr> 
+          </apex:datatable>
+            <div align="center">  
+          <apex:commandButton value="Add New Row" immediate="false"  action="{!addLogicModel}" rerender="PBSection"/>
+       </div> 
+            </apex:pageBlockSection>  
+
+        </apex:pageBlockSection>
+        <apex:pageBlockSection collapsible="true" Title="Documents - National Fixed Amount Only" columns="1">
+        <!--logic model-->
+        </apex:pageBlockSection>
+        <apex:pageBlockSection collapsible="true" Title="State Commission Only" columns="1">
+            <apex:inputField value="{!applicationInput.Which_State_are_you_applying_to__c}" required="false"/>
+        </apex:pageBlockSection>
+        
+        <!--<apex:pageBlockSection collapsible="true" Title="State Commission Only" columns="1">
+            <apex:inputField value="{!applicationInput.Which_State_are_you_applying_to__c}" required="true"/>
+        </apex:pageBlockSection>-->
+        
+    <apex:pageBlockSection collapsible="true" Title="Territories Only" columns="1">
+         <!--logic model-->
+          <apex:pageBlockSection title="Logical Table" id="PBSection">
+            <apex:outputPanel id="errmsg">
+            <apex:pagemessage severity="warning" title="Successfully Saved" rendered="{!displaymsg}" id="displaymsg"/>
+            <apex:pageMessages id="showmsg"/>
+            </apex:outputPanel>
+          <div align="center">  
+        <!--   <apex:commandButton value="save" action="{!save}" reRender="errmsg"/> -->
+        </div>
+           
+           <apex:dataTable value="{!LogicModelLists}" var="c" rows="4" border="8" cellspacing="10" cellpadding="10">
+         
+         
+         <tr> 
+              <apex:column headerValue="Problem">
+              <apex:inputField value="{!c.Problem__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Inputs">
+              <apex:inputField value="{!c.Inputs__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Activity">
+              <apex:inputField value="{!c.Activity__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+                 <apex:column headerValue="Outputs">
+              <apex:inputField value="{!c.Outputs__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Short_Term">
+              <apex:inputField value="{!c.Short_Term__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Mid_Term">
+              <apex:inputField value="{!c.Mid_Term__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Long_Term">
+              <apex:inputField value="{!c.Long_Term__c}" style="width: 150px; height: 200px"/>
+              </apex:column> 
+         </tr> 
+          </apex:datatable>
+            <div align="center">  
+          <apex:commandButton value="Add New Row" immediate="false"  action="{!addLogicModel}" rerender="PBSection"/>
+       </div> 
+            </apex:pageBlockSection>  
+
+                 </apex:pageBlockSection>
+      
+ 
+      <apex:pageBlockSection collapsible="true" Title="State Education Award Only" columns="1">
+      <apex:inputField value="{!applicationInput.Grant_Type__c}" style="width:15%;" /> 
+       <apex:inputField value="{!applicationInput.Funding_Type__c}" style="width:15%;" /> 
+                      <apex:inputField value="{!applicationInput.Sub_Application_Due_Date__c}"/>    
+         </apex:pageBlockSection>
+      
+     
+        
+        <apex:pageBlockSection collapsible="true" Title="State Fixed Amount Only" columns="1">
+     <apex:inputField value="{!applicationInput.Which_State_are_you_applying_to__c}" style="width:15%;"/>  
+      <apex:inputField value="{!applicationInput.Grant_Type__c}" style="width:15%;"/> 
+       <apex:inputField value="{!applicationInput.Funding_Type__c}" style="width:15%;"/>  
+                <apex:inputField value="{!applicationInput.Sub_Application_Due_Date__c}"/>    
+       
+         </apex:pageBlockSection>
+         <apex:pageBlockSection collapsible="true" Title="Territories Only" columns="1">
+         <!--logic model-->
+          <apex:pageBlockSection title="Logical Table" id="PBSection">
+            <apex:outputPanel id="errmsg">
+            <apex:pagemessage severity="warning" title="Successfully Saved" rendered="{!displaymsg}" id="displaymsg"/>
+            <apex:pageMessages id="showmsg"/>
+            </apex:outputPanel>
+          <div align="center">  
+        <!--   <apex:commandButton value="save" action="{!save}" reRender="errmsg"/> -->
+        </div>
+           
+           <apex:dataTable value="{!LogicModelLists}" var="c" rows="4" border="8" cellspacing="10" cellpadding="10">
+         
+         
+         <tr> 
+              <apex:column headerValue="Problem">
+              <apex:inputField value="{!c.Problem__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Inputs">
+              <apex:inputField value="{!c.Inputs__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Activity">
+              <apex:inputField value="{!c.Activity__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Short_Term">
+              <apex:inputField value="{!c.Short_Term__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Mid_Term">
+              <apex:inputField value="{!c.Mid_Term__c}" style="width: 150px; height: 200px"/>
+              </apex:column>
+              <apex:column headerValue="Long_Term">
+              <apex:inputField value="{!c.Long_Term__c}" style="width: 150px; height: 200px"/>
+              </apex:column> 
+         </tr> 
+          </apex:datatable>
+            <div align="center">  
+          <apex:commandButton value="Add New Row" immediate="false"  action="{!addLogicModel}" rerender="PBSection"/>
+       </div> 
+            </apex:pageBlockSection>  
+
+                 </apex:pageBlockSection>
+                 
+        
+         <apex:pageBlockSection collapsible="true" Title="Documents - Territories Only " columns="1">
+         <apex:commandButton value="Fed. Approved Indirect Cost Agreement" />
+                 </apex:pageBlockSection>
+                     
+</apex:pageBlock> 
+
+
+ <!--SeniorCorps-->  
+<apex:pageBlock rendered="{!rectypename=='SeniorCorps'}" >
+ <apex:pageBlockSection title="Narratives" columns="1">
+<apex:inputField value="{!applicationInput.Executive_Summary__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Strengthen_Communities__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Recruitment_and_Development__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Organization_Capability__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Program_Management__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Additional_Information__c}" required="false"/>
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Documents" columns="2">
+<apex:inputfield value="{!applicationInput.Community_Advisory_Name_and_Addresses__c}" required="false"/>
+<apex:inputfield value="{!applicationInput.IRS_Certificiation_of_Non_Profit_Status__c}" required="false"/>
+<apex:inputfield value="{!applicationInput.Negotiated_Indirect_Cost_Agreement__c}" required="false"/>
+<apex:inputfield value="{!applicationInput.Organizational_Chart__c}" required="false"/>
+<apex:inputfield value="{!applicationInput.Project_Directors_Job_Description__c}" required="false"/>
+</apex:pageBlockSection>
+   <apex:pageBlockSection title="Documents">    
+<apex:inputfield value="{!applicationInput.Documents__c}" required="false"/>
+</apex:pageBlockSection>
+
+
+<!-- rich text area <apex:pageBlockSection title="Foster Grandparent Only" columns="1">
+<apex:inputfield value="{!applicationInput.PNS_Amendment_if_applicable__c}" required="false"/>
+<apex:inputfield value="{!applicationInput.of_Unduplicated_Volunteers__c}" required="false"/>
+</apex:pageBlockSection>-->
+ <apex:outputPanel id="pgsecdoc" >
+<apex:pageBlockSection title="Documents- Foster Grandparents Only" columns="1" rendered="{!applicationInput.Type_of_Application__c=='Amendment'}">                                                                        
+<apex:inputfield value="{!applicationInput.Documents_Foster_Grandparents_Only__c}" required="false"/>
+</apex:pageBlockSection>       
+                                                                      
+<apex:pageBlockSection title="RSVP Only" columns="1"  >
+<!--Rich text<apex:inputfield value="{!applicationInput.PNS_Amendment_if_applicable1__c}" required="false"/>-->
+<apex:inputfield value="{!applicationInput.of_Unduplicated_Volunteers1__c}" required="false"/>
+</apex:pageBlockSection>    
+<apex:pageBlockSection title="Documents - RSVP Only" columns="2" rendered="{!applicationInput.Type_of_Application__c=='New'}">    
+<apex:inputfield value="{!applicationInput.Documents_RSVP_Only__c}" required="false"/>
+<apex:commandButton value="Attach" action="!"/>
+</apex:pageBlockSection>
+<!--rich text rendering
+<apex:pageBlockSection title="SCP Only" columns="1" >    
+<apex:inputfield value="{!applicationInput.PNS_Amendment_if_applicable3__c}" required="false"/>
+</apex:pageBlockSection>-->
+
+<apex:pageBlockSection title=" Documents- SCP Only" columns="1" rendered="{!applicationInput.Type_of_Application__c=='Continuation'}">    
+<apex:inputfield value="{!applicationInput.Documents_SCP_Only__c}" required="false"/>
+</apex:pageBlockSection>
+                                                                        
+<apex:pageBlockSection title=" SCP Fixed Only" columns="1" rendered="{!applicationInput.Type_of_Application__c=='Continuation'}">    
+<apex:inputfield value="{!applicationInput.of_Unduplicated_Volunteers2__c}" required="false"/>
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Documents- SCP Fixed Only" columns="1">    
+<apex:inputfield value="{!applicationInput.Documents_SCP_Fixed_Only__c}" required="false"/>
+</apex:pageBlockSection>
+                                                                       
+<apex:pageBlockSection title=" Senior Demonstration Program Only" columns="1" rendered="{!applicationInput.Type_of_Application__c=='Continuation'}">    
+<apex:inputfield value="{!applicationInput.Senior_Demonstration_Program_Only__c}" required="false"/>
+</apex:pageBlockSection> 
+ </apex:outputPanel>
+</apex:pageblock>
+<!--SeniorCorps-->
+
+<!--NCC--->
+<apex:pageblock rendered="{!rectypename=='AmeriCorps NCCC'}">
+<apex:pageBlockSection title="Co-Sponsoring Agency Information" columns="2">
+<apex:inputField value="{!applicationInput.Co_Sponsoring_Agency_Information__c}"/>
+<apex:inputField value="{!applicationInput.Site_Supervisor_Nameco__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Site_Mailing_Addressco__c}" required="false"/>
+<apex:inputField value="{!applicationInput.TitleNCCCCO__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Mailing_Address_2__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Site_TelephoneNCCCCO__c}" required="false"/>
+<apex:inputField value="{!applicationInput.cityco__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Contact_NumberNCCCCO__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Stateco__c}" required="false"/>
+<apex:inputField value="{!applicationInput.EmailNCCCCO__c}" required="false"/>
+<apex:inputField value="{!applicationInput.ZipCO__c}" required="false"/>
+
+
+
+
+
+
+
+
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Project Information" columns="2">
+<apex:inputField value="{!applicationInput.How_many_teams_are_being_requested__c}" required="false"
+/>
+<apex:inputField value="{!applicationInput.How_many_weeks_will_it_take_to_complete__c}" required="false"/>
+<apex:inputField value="{!applicationInput.If_your_org_currently_funded_by_CNCS__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Funded_by_AC_State_National_or_VISTA__c}" required="false"/>
+<!--<apex:inputField value="{!applicationInput.Organization_type_Check_all_that_apply__c}" required="true"/>-->
+<apex:inputField value="{!applicationInput.Additional_Informationcurrentlyfunded__c}" required="false"/>
+<apex:inputField value="{!applicationInput.What_is_the_org_s_annual_budget__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Could_this_be_accomplished_with_contract__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Resources_to_pay_for_contracted_labor__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Will_service_replace_any_of_your_org_s_s__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Area_type__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Describe_accessibility_of_the_proj_site__c}" style="width:20%;"/>
+<apex:inputField value="{!applicationInput.Identify_communication_access_methods__c}" style="width:60%;"/>
+</apex:pageBlockSection>
+
+<!--
+<apex:pageBlockSection title="Primary Project Work Site " columns="2" >
+<apex:inputField value="{!applicationInput.Site_Supervisor_Nameprimary__c}" required="true" />
+<apex:inputField value="{!applicationInput.TitlePrimary__c}" required="true"/>
+<apex:inputField value="{!applicationInput.Contact_Numberprimary__c}" required="true"/>
+<apex:inputField value="{!applicationInput.Site_Telephoneprimary__c}" required="true"/>
+<apex:inputField value="{!applicationInput.Emailprimary__c}" required="true"/>
+<apex:inputField value="{!applicationInput.Site_Street_AddressPrimary__c}" required="true"/>
+<apex:inputField value="{!applicationInput.Cityprimary__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Stateprimary__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Zipprimary__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Mailing_Street_Addressprimary__c}"/>
+<apex:inputField value="{!applicationInput.Cityprimarymailing__c}"/>
+<apex:inputField value="{!applicationInput.Stateprimarymailing__c}"/>
+<apex:inputField value="{!applicationInput.Zipprimarymailing__c}"/>
+
+</apex:pageBlockSection>
+-->
+
+
+<apex:pageBlockSection title="Missions and Objectives" columns="1">
+<apex:inputField value="{!applicationInput.Agency_Mission__c}"/>
+<apex:inputField value="{!applicationInput.Define_Community_Need__c}"/>
+<apex:inputField value="{!applicationInput.How_Will_Project_Meet_These_Needs__c}"/>
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Project Plan" columns="1">
+
+<apex:inputField value="{!applicationInput.Team_Tasks_and_Activities__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Project_Work_Plan__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Impacted_by_Inclement_Weather__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Inclement_Weather_Work_Plan__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Post_Project_Maintenance_Support__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Project_Activities_Outcomes__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Issue_Areas__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Objectives__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Otherobjectives__c}" required="false"/>
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Community Involvement" columns="1">
+<apex:inputField value="{!applicationInput.Community_Involvement_with_Organization__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Describe_Volunteer_Outreach__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Organization_Capability__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Publicity_of_NCCC_Partnership__c}" required="false"/>
+
+
+</apex:pageBlockSection>
+
+
+<apex:pageBlockSection title="Accommodations" columns="2">
+<apex:inputField value="{!applicationInput.Housing_Street_Address__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Laundry_Facility_Street_Address__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Cityhousing__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Citylaundry__c}" required="false"/>
+<apex:inputField value="{!applicationInput.ZipLaundry__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Ziphousing__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Statehousing__c}" required="false"/>
+<apex:inputField value="{!applicationInput.StateLaundry__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Housing_Start_Date__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Access_to_kitchen_and_meal_plan__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Housing_End_Date__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Accessibility_for_Mbrs_with_Disabilities__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Housing_Type__c}" required="false"/>
+<apex:inputField value="{!applicationInput.tools_Supplies_requested_from_NCCC__c}" required="false"/>
+<apex:inputField value="{!applicationInput.of_sleeping_rooms__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Project_Area_Climate_Geography__c}" required="false"/>  
+<apex:inputField value="{!applicationInput.of_bathrooms__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Additional_Cultural_Recreational_Educa__c}" required="false"/>
+</apex:pageBlockSection>
+
+    
+<apex:pageBlockSection title="Member Development" columns="2">
+<apex:inputField value="{!applicationInput.Pre_Project_Training__c}" required="false"/> 
+<apex:inputField value="{!applicationInput.CPR_First_Aid_Training_Details__c}" required="false"/>   
+<apex:inputField value="{!applicationInput.Overview_of_your_Organization_Project__c}" required="false"/>   
+<apex:inputField value="{!applicationInput.Introductions_of_Team_to_Sponsor_Staff__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Goals_Objectives_of_the_Project__c}" required="false"/>
+
+<apex:inputField value="{!applicationInput.Tour_of_Work_Site_s_the_Community__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Safety_Orientation_Training__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Other_Service_Learning_Opportunities__c}" required="false"/>
+</apex:pageBlockSection>
+ <apex:pageBlockSection title="Tools, Equipment, & Personal Gear " columns="2"> 
+ <apex:inputField value="{!applicationInput.Equipment_Tools_Storage_Provided__c}" required="false"/>
+ <apex:inputField value="{!applicationInput.Equipment_Tool_Requests_for_NCCC__c}" required="false"/>
+ <apex:inputField value="{!applicationInput.Equipment_Tool_Safety_Hazards__c}" required="false"/>
+ <apex:inputField value="{!applicationInput.Personal_equipment_Clothing__c}" required="false"/>
+ 
+ 
+      </apex:pageBlockSection>                                                                                        
+<apex:pageBlockSection title="Security, Safety, & Med. Considerations" columns="2">                                                                                          
+<apex:inputField value="{!applicationInput.Any_additional_background_checks__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Difficult_or_Uncomfortable_Conditions__c}" required="false"/>
+<apex:inputField value="{!applicationInput.If_Yes_please_specifyanyadditional__c}" required="false"/>
+<apex:inputField value="{!applicationInput.If_Yes_please_specifyanypossible__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Any_possible_exposure_to_safety_hazards__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Health_restrictions__c}" required="false"/>
+
+<apex:inputField value="{!applicationInput.If_yes_please_specifydiffcult__c}" required="false"/>
+
+<apex:inputField value="{!applicationInput.If_yes_please_specifyhealthrestrictions__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Any_potentially_hazardous_chemicals__c   }" required="false"/>      
+<apex:inputField value="{!applicationInput.Cleaning_Construction_Products_Used__c  }" required="false"/>     
+<apex:inputField value="{!applicationInput.Required_or_recommend_immunizations__c }" required="false" style="width:40%;"/>   
+<apex:inputField value="{!applicationInput.List_Emergency_facilities__c }" required="false"/>      
+<apex:inputField value="{!applicationInput.Other_potential_safety_considerations__c}" required="false"/>   
+                                                                              
+</apex:pageBlockSection>
+                        <!--logic table-->                                                                               
+<apex:pageBlockSection title="Permits" columns="1">
+<apex:inputField value="{!applicationInput.Specific_work_permits_legal_permissions__c}" required="false"/>
+<apex:inputField value="{!applicationInput.If_No_please_specify__c}" required="false"/>
+
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Project Summary" columns="1">
+<apex:inputField value="{!applicationInput.Project_Summary_in_less_than_250_words__c}" required="false"/>
+
+</apex:pageBlockSection>
+
+
+</apex:pageblock>
+<!--VISTA-->
+<apex:pageblock mode="edit" rendered="{!rectypename=='VISTA'}">
+<apex:pageBlockSection title="Project Information" columns="1">
+<apex:inputField value="{!applicationInput.Target_Populations__c}" required="false"/>
+<apex:inputfield value="{!applicationInput.Program_Type__c}"/>
+<apex:inputfield value="{!applicationInput.Cost_Share__c}"/>
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Narratives" columns="1">
+<apex:inputfield value="{!applicationInput.Executive_Summary__c}" style="width:20%;"/>
+<apex:inputfield value="{!applicationInput.Organizational_Capacity__c}"/> 
+<apex:inputfield value="{!applicationInput.Standard_Program_Grant_Support_Grant__c}"/>
+<apex:inputfield value="{!applicationInput.Strengthen_Communities__c}"/>
+<apex:inputfield value="{!applicationInput.Need__c}"/>
+<apex:inputfield value="{!applicationInput.Recruitment_and_Development__c}"/>
+<apex:inputfield value="{!applicationInput.VISTA_Assignment__c}"/>
+<apex:inputfield value="{!applicationInput.Project_Management__c}"/>
+<apex:inputfield value="{!applicationInput.Intermediary_Justification__c}"/>
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Documents" columns="1">
+<apex:inputfield value="{!applicationInput.Documents__c}" style="width:20%;"/>
+</apex:pageBlockSection>
+
+
+</apex:pageblock>
+<!--
+<apex:pageBlockSection title="Primary Project Work Site" columns="1">
+
+<apex:inputField value="{!applicationInput.Site_Supervisor_Nameco__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Title_nccc__c}" required="True"/>
+<apex:inputfield value="{!applicationInput.Site_TelephoneNCCCCO__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Email_NCCC__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Number_of_Unduplicated_Volunteers__c}" required="false"/>
+<apex:inputField value="{!applicationInput.Number_of_Volunteers__c}" required="false"/>
+<apex:inputfield value="{!applicationInput.Veterans__c}" required="false"/>
+  <apex:inputfield value="{!applicationInput.Focus_Areas_and_Objectives__c}" required="false"/>
+  <apex:inputField value="{!applicationInput.Active_MOU__c}" required="false"/>
+  -->
+<!--Logical Table-->
+
+
+
+<apex:pageBlockSection title="Certification" columns="1" >
+<apex:outputField value="{!applicationInput.Certification__c}" style="float:right;" />
+<apex:inputField value="{!applicationInput.I_Agree__c}" required="false"/>
+</apex:pageBlockSection> 
+                                                                   
+</apex:pageBlock> 
+ </apex:form>
+  </apex:page>

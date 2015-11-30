@@ -1,0 +1,3 @@
+<apex:page standardController="CNCS_Corporate_Program__c">
+<cprh:NotesAndAttachmentsViewer ParentRecordId="{!CNCS_Corporate_Program__c.Id}"></cprh:NotesAndAttachmentsViewer>
+</apex:page>

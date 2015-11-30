@@ -1,0 +1,71 @@
+<apex:page controller="AccountSavecls" showheader="false">
+<meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>  
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <style>
+ .vertical-center > .container {
+ 
+  display: inline-block;
+  vertical-align: middle;  
+  
+}
+</style>
+ <div class="container-fluid text-center" style="padding-right: 281px;">
+ <br/> 
+ <h2>Organization Registration</h2>  <br/><br/><br/><br/>
+  <apex:form styleclass="form-horizontal" html-role="form"> 
+    <div class="form-group col-md-12">     
+         
+            <label class="control-label col-sm-6 col-md-6 col-lg-6" for="Name">Organization Name:</label>
+          
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <apex:inputField styleclass="form-control" id="Name" html-placeholder="Organization Name" value="{!actobj.Name}"/>
+          </div>     
+    </div>
+    <div class="form-group col-md-12">
+        
+            <label class="control-label col-sm-6 col-md-6 col-lg-6"  for="pwd">Phone:</label>
+         
+          <div class="col-sm-6 col-md-6 col-lg-6">          
+            <apex:inputField styleclass="form-control" id="pwd" html-placeholder="Enter password" value="{!actobj.Phone1__c}"/>
+          </div>
+     
+    </div>
+    <div class="form-group col-md-12">
+    
+        <label class="control-label col-sm-6 col-md-6 col-lg-6"  for="email">Email:</label>
+    
+      <div class="col-sm-6 col-md-6 col-lg-6">          
+        <apex:inputField styleclass="form-control" id="email" html-placeholder="Email" value="{!actobj.Email__c}"/>
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+    
+      <label class="control-label col-sm-6 col-md-6 col-lg-6"  for="orglegalName">Organization Legal Name:</label>
+     
+      <div class="col-sm-6 col-md-6 col-lg-6">          
+        <apex:inputField styleclass="form-control" id="orglegalName" html-placeholder="Organization Legal Name" value="{!actobj.Legal_Name__c}"/>
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+    
+      <label class="control-label col-sm-6 col-md-6 col-lg-6"  for="address1">Address 1:</label>
+    
+      <div class="col-sm-6 col-md-6 col-lg-6">          
+        <apex:inputField styleclass="form-control" id="address1" html-placeholder="Address 1" value="{!actobj.Address_1__c}"/>
+      </div>
+    </div>
+    
+    <div class="form-group col-md-12">        
+      <div class="col-sm-offset-2">       
+    
+        <Apex:commandbutton styleclass="btn btn-default" value="Save" action="{!saveRec}"/>
+       
+      </div>
+    </div>
+  </apex:form>
+</div>
+
+</apex:page>

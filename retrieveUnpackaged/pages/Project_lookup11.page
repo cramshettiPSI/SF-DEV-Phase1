@@ -1,0 +1,29 @@
+<apex:page controller="projectController">
+    <apex:form >
+            <apex:pageBlock title="My Projects">
+                <apex:pageBlockSection title="My Content Section" columns="2">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Lookup to an project" for="theLookup"/>
+                        <apex:inputField value="{!Project.Project__c}"/>
+                       
+                    </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection title="My Next action" columns="1">
+                      <apex:pageBlockSectionItem >
+                      <apex:outputText value="Click apply to continue to application" />
+                        <apex:commandbutton value="Apply" action="{!apply}"/>
+                        
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                    <apex:outputText value="Click cancel to go back to NOFA list view" />
+                        <apex:commandbutton value="Cancel" action="{!cancel}"/>
+                        
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >  
+                        <apex:outputText value="Cannot find your Project?" />
+                        <apex:commandbutton value="Create New Project" action="{!createProject}"/>
+                   </apex:pageBlockSectionItem>
+               </apex:pageBlockSection>
+           </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,138 @@
+<apex:page controller="NewContactSearchController" sidebar="false">
+
+  <apex:form >
+  <apex:pageMessages id="errors" />
+
+  <apex:pageBlock title="Find Me A Customer!" mode="edit">
+
+  <table width="100%" border="0">
+  <tr>  
+    <td width="200" valign="top">
+
+      <apex:pageBlock title="Parameters" mode="edit" id="criteria">
+
+      <script type="text/javascript">
+      function doSearch() {
+
+searchServer(
+          document.getElementById("firstName").value,
+          document.getElementById("lastName").value,
+          document.getElementById("accountName").value,        
+          document.getElementById("State_of_Residence__c").value);        
+              
+                }
+      </script> 
+
+      <apex:actionFunction name="searchServer" action="{!runSearch}" rerender="results,debug,errors">
+          <apex:param name="firstName" value="" />
+          <apex:param name="lastName" value="" />
+          <apex:param name="accountName" value="" />
+          <apex:param name="State_of_Residence__c" value="" />
+      </apex:actionFunction>
+
+      <table cellpadding="2" cellspacing="2">
+      <tr>
+        <td style="font-weight:bold;">First Name<br/>
+        <input type="text" id="firstName" onkeyup="doSearch();"/>
+        </td>
+      </tr>
+      <tr>
+        <td style="font-weight:bold;">Last Name<br/>
+        <input type="text" id="lastName" onkeyup="doSearch();"/>
+        </td>
+      </tr>
+      <tr>
+        <td style="font-weight:bold;">Account<br/>
+        <input type="text" id="accountName" onkeyup="doSearch();"/>
+        </td>
+      </tr>
+      <tr>
+        <td style="font-weight:bold;">State<br/>
+        <input type="text" id="State_of_Residence__c" onkeyup="doSearch();"/>
+        </td>
+      </tr>
+
+      </table>
+
+      </apex:pageBlock>
+
+    </td>
+    <td valign="top">
+
+    <apex:pageBlock mode="edit" id="results">
+
+        <apex:pageBlockTable value="{!contacts}" var="contact">
+
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="First Name" action="{!toggleSort}" rerender="results,debug">
+                        <apex:param name="sortField" value="firstName" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!contact.firstName}"/>
+            </apex:column>
+
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Last Name" action="{!toggleSort}" rerender="results,debug">
+                        <apex:param name="sortField" value="lastName" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!contact.lastName}"/>
+            </apex:column>
+
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Account" action="{!toggleSort}" rerender="results,debug">
+                        <apex:param name="sortField" value="account.name" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!contact.account.name}"/>
+            </apex:column>
+
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="State" action="{!toggleSort}" rerender="results,debug">
+                        <apex:param name="sortField" value="account.name" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!contact.State_of_Residence__c}"/>
+            </apex:column>
+
+
+        </apex:pageBlockTable>
+
+    </apex:pageBlock>
+
+    </td>
+  </tr>
+  </table>
+
+  <apex:pageBlock title="Debug - SOQL" id="debug">
+      <apex:outputText value="{!debugSoql}" />           
+  </apex:pageBlock>    
+
+  </apex:pageBlock>
+  
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Process Selected" action="{!processSelected}" rerender="table"/>
+            </apex:pageBlockButtons>
+            <!-- In our table we are displaying the cContact records -->
+            <apex:pageBlockTable value="{!contactList}" var="c" id="table">
+                <apex:column >
+                    <!-- This is our selected Boolean property in our wrapper class -->
+                    <apex:inputCheckbox value="{!c.selected}"/>
+                </apex:column>
+                <!-- This is how we access the contact values within our cContact container/wrapper -->
+                <apex:column value="{!c.con.firstName}" />
+                <apex:column value="{!c.con.lastName}" />
+                <apex:column value="{!c.con.account.name}" />
+                <apex:column value="{!c.con.State_of_Residence__c}" />
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+
+  
+  </apex:form>
+
+</apex:page>

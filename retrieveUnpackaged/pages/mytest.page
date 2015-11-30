@@ -1,0 +1,60 @@
+<apex:page StandardController="Employment__c" extensions="MultiAdd" id="thePage" sidebar="false">
+    <apex:form >
+        <apex:pageblock id="pb" title="Expert Reviewer Application">
+                 
+        <apex:pageblocksection id="pb1">
+           
+        <apex:repeat value="{!lstInner}" var="e1" id="therepeat">
+            <apex:panelGrid columns="11">
+                <apex:panelGrid headerClass="Employer">
+                    <apex:facet name="header">Delete</apex:facet>
+                    <apex:commandButton value="X" action="{!Del}" rerender="pb1">
+                        <apex:param name="rowToBeDeleted" value="{!e1.recCount}" assignTo="{!selectedRowIndex}"></apex:param>
+                    </apex:commandButton>
+                </apex:panelGrid>
+                <apex:panelGrid title="SPD" >
+                    <apex:facet name="header">Employer</apex:facet>
+                    <apex:inputfield value="{!e1.acct.Name}"/>
+                </apex:panelGrid>
+                <apex:panelGrid title="SPD" >
+                    <apex:facet name="header">Organization Type</apex:facet>
+                    <apex:inputfield value="{!e1.acct.Organization_Type__c}"/>
+                </apex:panelGrid>
+                <apex:panelGrid >
+                    <apex:facet name="header">From</apex:facet>
+                    <apex:inputfield value="{!e1.acct.From__c}"/>
+                </apex:panelGrid>
+                <apex:panelGrid >
+                    <apex:facet name="header">To</apex:facet>
+                    <apex:inputfield value="{!e1.acct.To__c}"/>
+                </apex:panelGrid>
+                <apex:panelGrid >
+                    <apex:facet name="header">Job Description</apex:facet>
+                    <apex:inputfield value="{!e1.acct.Job_Description__c}"/>
+                </apex:panelGrid>
+                <apex:panelGrid >
+                    <apex:facet name="header">Area of Expertise</apex:facet>
+                    <apex:inputfield value="{!e1.acct.Area_of_Expertise__c}"/>
+                </apex:panelGrid>
+                <apex:panelGrid >
+                    <apex:facet name="header">Expertise</apex:facet>
+                    <apex:inputfield value="{!e1.acct.Expertise__c}"/>
+                </apex:panelGrid>
+                <apex:panelGrid >
+                    <apex:facet name="header">To</apex:facet>
+                    <apex:inputfield value="{!e1.acct.Experience_Type__c}"/>
+                </apex:panelGrid>
+                <apex:panelGrid >
+                    <apex:facet name="header">Years of Experience</apex:facet>
+                    <apex:inputfield value="{!e1.acct.Years_of_Experience__c}"/>
+                </apex:panelGrid>
+                 <div>
+            <apex:commandbutton value="Add" action="{!Add}" rerender="pb1"/>
+            <apex:commandbutton value="Save" action="{!Save}"/>
+           </div>
+            </apex:panelgrid>
+        </apex:repeat>
+    </apex:pageblocksection>
+</apex:pageblock>
+</apex:form>
+</apex:page>

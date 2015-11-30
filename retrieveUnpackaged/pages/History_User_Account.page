@@ -1,0 +1,3 @@
+<apex:page standardController="Contact">
+<cprh:NotesAndAttachmentsViewer ParentRecordId="{!Contact.Id}"></cprh:NotesAndAttachmentsViewer>
+</apex:page>

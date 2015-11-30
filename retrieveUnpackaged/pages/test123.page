@@ -1,0 +1,56 @@
+<apex:page standardController="account" extensions="ContactCreateController1">  
+  <apex:form >  
+    <apex:pageBlock title="Expert Review Application">
+      <apex:pageBlockButtons >
+        <apex:commandButton action="{!save}" value="Save"/>
+        <apex:commandButton action="{!save}" value="Save as a Draft"/>
+        <apex:commandButton action="{!Cancel}" value="Cancel"/>
+      </apex:pageBlockButtons>
+       <apex:pageblockSection columns="2" collapsible="true" Title="Account information" >
+        <apex:inputField value="{!acc.Name}" />
+        <apex:inputField value="{!acc.Phone}" />
+        <apex:inputField value="{!acc.Type}" />
+      </apex:pageblockSection>
+      <apex:pageblockSection columns="2" collapsible="true" Title="Account information" >
+          <apex:inputfield value="{!con.Salutation}" required="true"></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.FirstName}" required="true"></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Middle_Name__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.LastName}" required="true"></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Suffix__c}"></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Primary_Phone__c}" required="true"></apex:inputfield><br></br>
+          <apex:inputfield value="{!con.Is_this_a_Mobile_Number__c}" required="true"></apex:inputfield><br></br> 
+          <apex:inputfield value="{!con.Would_you_like_to_receive_texts__c}" required="true"></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.OtherPhone}"></apex:inputfield><br></br>
+          <apex:inputfield value="{!con.Email}" required="true"></apex:inputfield><br></br>
+          <apex:inputfield value="{!con.Re_Enter_Email__c}" required="true"></apex:inputfield><br/><br/>
+      </apex:pageblockSection>
+      <apex:pageBlockSection collapsible="true" Title="Contact Information" columns="2">
+          <apex:inputfield value="{!con.Mailing_Street_Address_1__c}" required="true"></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Mailing_Street_Address_2__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Mailing_State__c}" required="true"></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Mailing_City__c}" required="true" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Mailing_Zip_Code__c}" ></apex:inputfield><br/><br/>
+      </apex:pageblocksection>
+      <apex:pageBlockSection collapsible="true" Title="Demographic Information" columns="2"> 
+          <apex:inputfield value="{!con.State_of_Residence__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Gender__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Date_of_Birth__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Ethnicity_Type__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Race_Type__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.How_did_you_hear_about_CNCS_Reviews__c}" required="true" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Please_Specify__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Reasonable_Accommodations_Required__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.If_Yes_describe_what_is_needed__c}" ></apex:inputfield><br/><br/>
+       </apex:pageBlocksection>
+      
+      <apex:pageBlockSection columns="2" collapsible="true" title="Opportunity Information">
+        <apex:inputField value="{!opp.Name}" />
+        <apex:inputField value="{!opp.CloseDate}" />
+        <apex:inputField value="{!opp.StageName}" />
+      </apex:pageBlockSection>
+      <apex:pageBlockSection columns="2" collapsible="true" title="Addition Information">
+        <apex:inputFile value="{!attach.body}" fileName="{!attach.Name}" id="attach"/>
+     </apex:pageBlockSection>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

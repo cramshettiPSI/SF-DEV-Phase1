@@ -1,0 +1,58 @@
+<apex:page standardController="Application3__c" extensions="Withdrawapplicationtest" >
+
+
+<script src="https://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="/soap/ajax/26.0/connection.js" type="text/javascript">
+    
+
+if('{!Application3__c.Withdraw_Justification__c}' == ''){
+var withdrawal = window.prompt("You are about to withdraw this Grant Application.Once doing so, this application will no longer be in consideration for this competition. If you do not intend to withdraw this application, please click the Cancel button.If not please fill the withdraw justification comment box", "Justification");
+var cps = new sforce.SObject("Concept_Papers__c");
+cps.id = '{!Application3__c.Id}';
+cps.Status__c = 'Withdraw';
+cps.Withdraw_Justification__c = withdrawal;
+var result = sforce.connection.update([cps]);
+location.reload(true);
+with(){
+if('{!Application3__c.Withdraw_Justification__c}' != ''){
+cps.id = '{!Application3__c.Id}';
+cps.Approval_Status__c = 'Withdraw';
+var result = sforce.connection.update([cps]);
+location.reload(true);}
+else
+{
+
+var cps = new sforce.SObject("Application3__c");
+cps.id = '{!Application3__c.Id}';
+
+var result = sforce.connection.update([cps]);
+location.reload(true);
+};
+}
+
+else{
+var cps = new sforce.SObject("Application3__c");
+cps.id = '{!Application3__c.Id}';
+cps.Approval_Status__c = 'Withdraw';
+var result = sforce.connection.update([cps]);
+location.reload(true);
+
+}
+}
+</script>
+
+
+<apex:form >
+
+<apex:pageblock id="CustomList" title="Application Detail View" mode="maildetail">
+<apex:pageBlockButtons >
+     <apex:commandButton value="Withdraw" onclick=" return with();"/> 
+</apex:pageBlockButtons>
+<apex:pageBlockSection title="Applicant Information" id="pbsec" collapsible="False" Columns="2" >
+
+             <apex:outputField value="{!Application3__c.Status__c}" style="width:32%;"/>
+              <apex:outputField value="{!Application3__c.Withdraw_Justification__c}" />
+    </apex:pageBlockSection> 
+    </apex:pageblock>
+    </apex:form>
+    </apex:page>

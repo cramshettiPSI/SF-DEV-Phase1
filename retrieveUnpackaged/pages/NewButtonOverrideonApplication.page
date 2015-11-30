@@ -1,0 +1,6 @@
+<apex:page standardController="Application3__c">
+ <script>
+ alert('You are not allowed to created application please go to NOFA inorder to submit or create the Application');
+ window.location='https://cns--devsb12.cs32.my.salesforce.com/a0V/o';
+ </script>
+</apex:page>

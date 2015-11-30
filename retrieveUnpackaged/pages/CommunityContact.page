@@ -1,0 +1,155 @@
+<apex:page standardController="Contact" extensions="CreateContactExtns" showHeader="false">
+<meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>  
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <apex:form >
+    <apex:pageMessages ></apex:pageMessages>
+    <div style="width:80%;border:1px solid white;align:center;padding:10px;margin:1px;left:25px;top:50px;position:absolute;height:200px;font-weight:bold;">
+    <div style="align:right;float:right;width:885%;font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div style="align:right;float:right;width:80%;font-weight:bold;left:0px;right:190px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <apex:pageBlock title="CREATE ACCOUNT">
+        <div style="width:100%;border:4px solid darkblue;align:center;padding:-0.8px;">
+        <table width="100%">                   
+                <tr>                
+            
+                <div Class="pbSubheader brandTertiaryBgr first tertiaryPalette" style="float:left;width:100%;background-color :darkblue !important;height:25px !important;font-size:16px!important;font-weight:bold;" >
+                User Account
+                </div>           
+                </tr>
+                
+                <tr>                  
+                    <td style="width:40%;text-align:right;font-weight:bold;">
+                    <br/> <apex:outputLabel for="Salutation" value="Salutation"></apex:outputLabel>
+                    </td>
+                    <td style="width:5%;">&nbsp;</td>
+                    <td style="width:55%;text-align:left;"><br/> 
+                        <apex:inputfield value="{!contact.Salutation}" required="true" id="Salutation"></apex:inputfield>                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:40%;text-align:right;font-weight:bold;">
+                        <apex:outputLabel for="PreferredName" value="Preferred Name"></apex:outputLabel>
+                    </td><td style="width:5%;">&nbsp;</td>
+                    <td style="width:55%;text-align:left;">
+                    <apex:inputfield value="{!contact.Preferred_Name__c}"></apex:inputfield>                          
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:40%;text-align:right;font-weight:bold;">
+                        <apex:outputLabel for="FirstName" value="First Name"></apex:outputLabel>
+                    </td><td style="width:5%;">&nbsp;</td>
+                    <td style="width:55%;text-align:left;">
+                        <apex:inputfield value="{!contact.FirstName}" required="true"></apex:inputfield>                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:40%;text-align:right;font-weight:bold;">
+                        <apex:outputLabel for="MiddleName" value="Middle Name"></apex:outputLabel>
+                    </td><td style="width:5%;">&nbsp;</td>
+                    <td style="width:55%;text-align:left">
+                        <apex:inputfield value="{!contact.Middle_Name__c}" ></apex:inputfield>                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:40%;text-align:right;font-weight:bold;">
+                        <apex:outputLabel for="LastName" value="Last Name"></apex:outputLabel>
+                    </td><td style="width:5%;">&nbsp;</td>
+                    <td style="width:55%;text-align:left">
+                        <apex:inputfield value="{!contact.LastName}" required="true"></apex:inputfield>                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:40%;text-align:right;font-weight:bold;">
+                        <apex:outputLabel for="Suffix" value="Suffix"></apex:outputLabel>
+                    </td><td style="width:5%;">&nbsp;</td>
+                    <td style="width:55%;text-align:left">
+                        <apex:inputfield value="{!contact.Suffix__c}"></apex:inputfield>                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:40%;text-align:right;font-weight:bold;">
+                        <apex:outputLabel for="PrimaryPhone" value="Primary Phone"></apex:outputLabel>
+                    </td><td style="width:5%;">&nbsp;</td>
+                    <td style="width:55%;text-align:left;">
+                        <apex:inputfield value="{!contact.Primary_Phone__c}" required="true"></apex:inputfield>                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:40%;text-align:right;font-weight:bold;">
+                        <apex:outputLabel for="IsMobileNo" value="Is this a Mobile Number"></apex:outputLabel>
+                    </td><td style="width:5%;">&nbsp;</td>
+                    <td style="width:55%;text-align:left">
+                        <apex:inputfield value="{!contact.Is_this_a_Mobile_Number__c}" required="true"></apex:inputfield>                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:40%;text-align:right;font-weight:bold;">
+                        <apex:outputLabel for="needtext" value="Would you like to receive texts?"></apex:outputLabel>
+                    </td><td style="width:5%;">&nbsp;</td>
+                    <td style="width:55%;text-align:left">
+                        <apex:inputfield value="{!contact.Would_you_like_to_receive_texts__c}" required="true"></apex:inputfield>                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:40%;text-align:right;font-weight:bold;">
+                        <apex:outputLabel for="SecondryPh" value="Secondary Phone"></apex:outputLabel>
+                    </td><td style="width:5%;">&nbsp;</td>
+                    <td style="width:55%;text-align:left">
+                        <apex:inputfield value="{!contact.OtherPhone}"></apex:inputfield>                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:40%;text-align:right;font-weight:bold">
+                        <apex:outputLabel for="Email" value="Email"></apex:outputLabel>
+                    </td><td style="width:5%;">&nbsp;</td>
+                    <td style="width:55%;text-align:left;">
+                        <apex:inputfield value="{!contact.Email}" required="true"></apex:inputfield>                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:40%;text-align:right;font-weight:bold">
+                        <apex:outputLabel for="ReEnterEmail" value="Re-Enter Email"></apex:outputLabel>
+                    </td><td style="width:5%;">&nbsp;</td>
+                    <td style="width:55%;text-align:left">
+                        <apex:inputfield value="{!contact.Re_Enter_Email__c}" required="true"></apex:inputfield>                        
+                    </td>
+                    </tr>
+                <!--    <tr>
+                    <td style="width:40%;text-align:right;font-weight:bold">
+                        <apex:outputLabel for="NewPassword" value="New Password"></apex:outputLabel>
+                    </td><td style="width:5%;">&nbsp;</td>
+                     <td style="width:55%;text-align:left;">
+                        <apex:inputfield value="{!contact.New_Password__c}" required="true"></apex:inputfield>                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:40%;text-align:right;font-weight:bold">
+                        <apex:outputLabel for="ReEnterPassword" value="Re-Enter Password"></apex:outputLabel><br/><br/> 
+                    </td><td style="width:5%;">&nbsp;</td>
+                    <td style="width:55%;text-align:left">
+                        <apex:inputfield value="{!contact.Re_Enter_Password__c}" required="true"></apex:inputfield><br/><br/>                         
+                    </td> 
+                    </tr> --->
+                  
+                </table>
+                </div>
+                <apex:pageBlockButtons location="bottom">  
+                 
+                 <tr>
+                    <br/><td style="width:100%;text-align:left;height:250%;background-color:white">
+                         <apex:commandButton action="{!Cancel}" value="Cancel" style="height:30px;width:120px;color:black;border:3px solid darkblue;border-shadow:3px;padding:2px;"/>
+                    </td>
+                    <td style="width:100%;text-align:left;height:250%;background-color:white">
+                         <apex:commandButton action="{!Save}" value="Create" style="height:30px;width:120px;color:black;border:3px solid darkblue;border-shadow:3px;background-color:darkblue;"/>
+                    </td>
+                  </tr>
+                  
+                </apex:pageBlockButtons>
+    </apex:pageBlock>
+    </div>
+    <div style="float:left;width:15%;">&nbsp;</div>
+    </div>
+    </apex:form>
+</apex:page>

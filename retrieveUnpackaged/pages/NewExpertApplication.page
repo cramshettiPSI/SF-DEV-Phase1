@@ -1,0 +1,188 @@
+<apex:page standardController="Contact" extensions="ContactCreateController4" sidebar="true">  
+  <apex:form >  
+ <apex:pageMessages / >
+    <apex:pageBlock title="Expert Review Application">
+      <apex:pageBlockButtons location="Top">
+        <apex:commandButton action="{!save_upsert}" value="Save"/>
+        <apex:commandButton action="{!SaveAsDraft}" value="Save as a Draft" />
+        <apex:commandButton action="{!Cancel}" value="Cancel"/>
+      </apex:pageBlockButtons>
+      <apex:actionRegion >
+      <apex:pageblockSection columns="2" collapsible="true" Title="Account information" >
+          <apex:inputfield value="{!con.Salutation}"  ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.FirstName}"  ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Middle_Name__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.LastName}" required="true"></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Suffix__c}"></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Primary_Phone__c}"></apex:inputfield><br></br>
+          <apex:inputfield value="{!con.Is_this_a_Mobile_Number__c}" ></apex:inputfield><br></br> 
+          <apex:inputfield value="{!con.Would_you_like_to_receive_texts__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.OtherPhone}"></apex:inputfield><br></br>
+          <apex:inputfield value="{!con.Email}" ></apex:inputfield><br></br>
+          <apex:inputfield value="{!con.Re_Enter_Email__c}" ></apex:inputfield><br/><br/>
+      </apex:pageblockSection>
+      <apex:pageBlockSection collapsible="true" Title="Contact Information" columns="2">
+          <apex:inputfield value="{!con.Mailing_Street_Address_1__c}" /><br/><br/>
+          <apex:inputfield value="{!con.Mailing_Street_Address_2__c}" /><br/><br/>
+          <apex:inputfield value="{!con.Mailing_State__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Mailing_City__c}"></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Mailing_Zip_Code__c}" ></apex:inputfield><br/><br/>
+      </apex:pageblocksection>
+      <apex:pageBlockSection collapsible="true" Title="Demographic Information" columns="2">
+          <apex:inputfield value="{!con.State_of_Residence__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Gender__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Date_of_Birth__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Ethnicity_Type__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Race_Type__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.How_did_you_hear_about_CNCS_Reviews__c}"  ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Please_Specify__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.Reasonable_Accommodations_Required__c}" ></apex:inputfield><br/><br/>
+          <apex:inputfield value="{!con.If_Yes_describe_what_is_needed__c}" ></apex:inputfield><br/><br/>
+      </apex:pageBlocksection>
+      <apex:pageBlockSection columns="2" collapsible="true" title="Education History">
+           <apex:inputfield value="{!edu.Highest_Level_of_Education__c}"/>
+           <apex:inputfield value="{!edu.College_University__c}"/>
+           <apex:inputfield value="{!edu.Organization_Type__c}"/>
+           <apex:inputfield value="{!edu.Degree_Earned__c}"/>
+           <apex:inputfield value="{!edu.From__c}"/>
+           <apex:inputfield value="{!edu.To__c}"/> 
+           <apex:inputfield value="{!edu.Area_s_of_Study_Degree_Details__c}"/>
+           <apex:commandButton action="{!addRow}" value="Add Rows" >
+            <apex:actionSupport event="onchange" reRender="eduOP" />
+            </apex:commandButton>
+            <!-- Add more Education Start her -->
+           <apex:outputPanel id="eduOP">
+                <apex:pageBlock title="Education Details" id="edupb" rendered="{!edubool}" >
+  
+                <apex:pageMessages />
+                <apex:variable var="rowNumber" value="{!0}"/>
+                <apex:pageblockSection columns="1">
+                <apex:pageBlockTable title="Education" var="conts" value="{!attendeeList}"> 
+
+                <apex:column headerValue="No." style="width:20px; text-align:center;" headerClass="centertext">
+                <apex:outputText value="{0}" style="text-align:center;"> 
+                <apex:param value="{!rowNumber+1}" /> 
+                </apex:outputText>
+                </apex:column> 
+                <apex:column headerValue="Highest Level of Education" >
+                <apex:inputField value="{!conts.Highest_Level_of_Education__c}"/>
+                </apex:column> 
+                <apex:column headerValue="College/University" >
+                <apex:inputField value="{!conts.College_University__c}"/>
+                </apex:column> 
+                <apex:column headerValue="Degree Earned" >
+                <apex:inputField value="{!conts.Degree_Earned__c}"/>
+                </apex:column> 
+                <apex:column headerValue="Organization Type" >
+                <apex:inputField value="{!conts.Organization_Type__c}"/>
+                </apex:column> 
+                <apex:column headerValue="From" >
+                <apex:inputField value="{!conts.From__c}"/>
+                </apex:column> 
+                <apex:column headerValue="To" >
+                <apex:inputField value="{!conts.To__c}"/>
+                </apex:column> 
+                <apex:column headerValue="Area(s) of Study/Degree Details" >
+                <apex:inputField value="{!conts.Area_s_of_Study_Degree_Details__c}"/>
+                </apex:column> 
+                
+                <apex:column headerValue="Action" >
+                <apex:commandButton value="Delete" action="{!deleteRow}" reRender="eduOP">
+                <apex:param name="rowIndex" value="{!rowNumber}"/>
+                </apex:commandButton>
+                <apex:variable var="rowNumber" value="{!rowNumber+1}"/>
+                </apex:column> 
+                </apex:pageBlockTable>
+
+                </apex:pageblockSection>
+                <apex:pageBlockButtons >
+                
+                </apex:pageBlockButtons>
+                </apex:pageBlock>
+            </apex:outputPanel>
+       <!-- Ends here -->
+        
+           
+      </apex:pageBlockSection>
+      <apex:pageBlockSection columns="2" collapsible="true" title="Employment/Volunteer History">
+            <apex:inputfield label="Employer" value="{!emp.Name}"/>
+            <apex:inputfield value="{!emp.Organization_Type__c}"/>
+            <apex:inputfield value="{!emp.From__c}"/>
+            <apex:inputfield value="{!emp.To__c}"/>
+            <apex:inputfield value="{!emp.Area_of_Expertise__c}"/>
+            <apex:inputfield value="{!emp.Expertise__c}"/>
+            <apex:inputfield value="{!emp.Experience_Type__c}"/>
+            <apex:inputfield value="{!emp.Years_of_Experience__c}"/>
+             <apex:inputfield value="{!emp.Job_Description__c}"/>    
+             <apex:commandButton action="{!EmpaddRow}" value="Add Rows" >
+            <apex:actionSupport event="onchange" reRender="empOP" />
+            </apex:commandButton>
+            <!-- Add more Education Start her -->
+           <apex:outputPanel id="empOP">
+            <apex:pageBlock title="Employment/Volunteer Details" id="emppb" rendered="{!empbool}"  >
+  
+                <apex:pageMessages />
+                <apex:variable var="rowNumber" value="{!0}"/>
+                <apex:pageblockSection columns="1">
+                <apex:pageBlockTable title="Employment" var="conts" value="{!empattendeeList}"> 
+
+                <apex:column headerValue="No." style="width:20px; text-align:center;" headerClass="centertext">
+                <apex:outputText value="{0}" style="text-align:center;"> 
+                <apex:param value="{!rowNumber+1}" /> 
+                </apex:outputText>
+                </apex:column> 
+                <apex:column headerValue="Organization Type" >
+                <apex:inputField value="{!conts.Organization_Type__c}"/>
+                </apex:column> 
+                <apex:column headerValue="From" >
+                <apex:inputField value="{!conts.From__c}"/>
+                </apex:column> 
+                <apex:column headerValue="To" >
+                <apex:inputField value="{!conts.To__c}"/>
+                </apex:column> 
+                <apex:column headerValue="Area of Expertise_" >
+                <apex:inputField value="{!conts.Area_of_Expertise__c}"/>
+                </apex:column> 
+                <apex:column headerValue="Expertise" >
+                <apex:inputField value="{!conts.Expertise__c}"/>
+                </apex:column> 
+                <apex:column headerValue="Experience Type" >
+                <apex:inputField value="{!conts.Experience_Type__c}"/>
+                </apex:column> 
+                <apex:column headerValue="Years of Experience" >
+                <apex:inputField value="{!conts.Years_of_Experience__c}"/>
+                </apex:column> 
+                <apex:column headerValue="Job Description" >
+                <apex:inputField value="{!conts.Job_Description__c}"/>
+                </apex:column> 
+                
+                <apex:column headerValue="Action" >
+                <apex:commandButton value="Delete" action="{!empdeleteRow}" reRender="empOP">
+                <apex:param name="rowIndex" value="{!rowNumber}"/>
+                </apex:commandButton>
+                <apex:variable var="rowNumber" value="{!rowNumber+1}"/>
+                </apex:column> 
+                </apex:pageBlockTable>
+
+                </apex:pageblockSection>
+                <apex:pageBlockButtons >
+                
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+       </apex:outputPanel>
+       <!-- Ends here -->
+                     
+     </apex:pageBlockSection>
+     </apex:actionRegion>
+     
+     
+     
+     <apex:actionRegion >
+      <apex:pageBlockSection columns="2" collapsible="true" title="Attachments">
+        <apex:inputFile value="{!attach.body}" fileName="{!attach.Name}" id="attach" />
+      </apex:pageBlockSection>
+      </apex:actionRegion>
+      
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

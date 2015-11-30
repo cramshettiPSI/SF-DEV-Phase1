@@ -1,0 +1,35 @@
+<apex:page standardcontroller="Contact" extensions="theController1" sidebar="false">
+<style>
+.tertiaryPalette{
+ background-color:DarkBlue!important;
+}
+</style>
+   <apex:form >
+      <apex:pageBlock mode="edit" title="Expert Reviewer Application">
+      <apex:pageBlockButtons location="top">
+          <apex:commandButton value="Save" action="{!save}"/>
+          <apex:commandButton value="SaveAsADraft" action="{!save}"/>        
+          <apex:commandButton value="Cancel" action="{!cancel}"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlocksection title="Account Information" columns="2" collapsible="true">
+                         
+         </apex:pageBlocksection>
+         <apex:pageBlocksection title="Contact Information" columns="2" collapsible="true">
+            
+         </apex:pageBlocksection>
+         <apex:pageBlocksection title="Demographic Information" columns="2" collapsible="true">
+            
+         </apex:pageBlocksection>
+         
+          <apex:pageBlocksection title="Education History" columns="2" collapsible="true">
+            
+         </apex:pageBlocksection>
+         <apex:pageblocksection title="Employment/Volunteer History" columns="2" collapsible="true">
+            
+         </apex:pageblocksection>
+         <apex:pageblocksection title="Attachments" id="Attachments" columns="2" collapsible="true">
+            
+         </apex:pageblocksection>
+         </apex:pageBlock>
+   </apex:form>
+</apex:page>

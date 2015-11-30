@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Reviewer_Profile_has_been_Processed_Accepted</fullName>
+        <description>Reviewer Profile has been Processed: Accepted.</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>pmungamuri@plan-sys.com.state</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Accept</template>
+    </alerts>
+    <alerts>
+        <fullName>STAFF</fullName>
+        <description>STAFF</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>pmungamuri@plan-sys.com.state</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Staff_notification_accept</template>
+    </alerts>
+    <alerts>
+        <fullName>Staff_Rejections_notification</fullName>
+        <description>Staff Rejections notification</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>kyama@plan-sys.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/User_Reviewer_reject</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Change_Contact_Owner</fullName>
+        <field>OwnerId</field>
+        <lookupValue>avasili@plan-sys.com.su</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Change Contact Owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Expert_Reviewer_Submission_date</fullName>
+        <field>Submitted_date__c</field>
+        <formula>NOW()</formula>
+        <name>Expert Reviewer Submission date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>popPerId</fullName>
+        <field>Legal_Person_ID__c</field>
+        <formula>VALUE( perSequence__c )</formula>
+        <name>popPerId</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>Expert Reviewer Submission rule</fullName>
+        <actions>
+            <name>Expert_Reviewer_Submission_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Contact.Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <description>Submitted date info</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Staff notification accept</fullName>
+        <actions>
+            <name>STAFF</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Contact.Status__c</field>
+            <operation>equals</operation>
+            <value>Accepted</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>popLegacyPerId</fullName>
+        <actions>
+            <name>popPerId</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Contact.FirstName</field>
+            <operation>notEqual</operation>
+            <value>null</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>staff reject</fullName>
+        <actions>
+            <name>Staff_Rejections_notification</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Contact.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

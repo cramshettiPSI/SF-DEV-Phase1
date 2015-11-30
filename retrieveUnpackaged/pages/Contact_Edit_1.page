@@ -1,0 +1,2 @@
+<apex:page standardController="Contact" extensions="DispatcherContactEditController"  action="{!nullValue(redir.url, urlFor($Action.Contact.Edit, contact.id, null, true))}">
+</apex:page>

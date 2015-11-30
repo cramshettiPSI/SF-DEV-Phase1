@@ -1,0 +1,73 @@
+<apex:page standardController="Contact" extensions="MultipleUploadController" sidebar="false">
+    <apex:form >
+      <apex:pageBlock title="UserAccount Edit">
+          <apex:pageBlockButtons location="top">
+              <apex:commandButton value="Save" action="{!save}" />   
+              <apex:commandbutton value="Save as a Draft" action="{!Save}"/>
+              <apex:commandButton value="Cancel" action="{!cancel}"/>
+          </apex:pageBlockButtons>
+          <apex:pageBlockSection title="Account Information">
+              <apex:inputfield value="{!contact.Salutation}" required="true"></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.FirstName}" required="true"></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.Middle_Name__c}" ></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.LastName}" required="true"></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.Suffix__c}"></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.Primary_Phone__c}" required="true"></apex:inputfield><br></br>
+              <apex:inputfield value="{!contact.Is_this_a_Mobile_Number__c}" required="true"></apex:inputfield><br></br> 
+              <apex:inputfield value="{!contact.Would_you_like_to_receive_texts__c}" required="true"></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.OtherPhone}"></apex:inputfield><br></br>
+              <apex:inputfield value="{!contact.Email}" required="true"></apex:inputfield><br></br>
+              <apex:inputfield value="{!contact.Re_Enter_Email__c}" required="true"></apex:inputfield><br/><br/>     
+          </apex:pageBlockSection>
+          <apex:pageBlockSection collapsible="true" Title="Contact Information" columns="2">
+              <apex:inputfield value="{!contact.Mailing_Street_Address_1__c}" required="true"></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.Mailing_Street_Address_2__c}" ></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.Mailing_State__c}" required="true"></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.Mailing_City__c}" required="true" ></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.Mailing_Zip_Code__c}" ></apex:inputfield><br/><br/>
+          </apex:pageblocksection>
+          <apex:pageBlockSection collapsible="true" Title="Demographic Information" columns="2">  
+              <apex:inputfield value="{!contact.State_of_Residence__c}" ></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.Gender__c}" ></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.Date_of_Birth__c}" ></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.Ethnicity_Type__c}" ></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.Race_Type__c}" ></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.How_did_you_hear_about_CNCS_Reviews__c}" required="true" ></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.Please_Specify__c}" ></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.Reasonable_Accommodations_Required__c}" ></apex:inputfield><br/><br/>
+              <apex:inputfield value="{!contact.If_Yes_describe_what_is_needed__c}" ></apex:inputfield><br/><br/>
+          </apex:pageBlocksection>
+          <apex:pageBlock >
+          <apex:pageBlockbuttons location="bottom" >
+               <apex:commandButton value="Upload"  action="{!SaveAttachments}" status="actStatusId" />
+               <apex:actionStatus id="actStatusId" >
+               <apex:facet name="start" >
+                  <img src="/img/loading.gif" />                    
+               </apex:facet>
+               </apex:actionStatus>  
+            <apex:pageMessages id="MSG"/> 
+            </apex:pageBlockbuttons>
+            <apex:pageBlockSection title="Attachments"></apex:pageBlockSection> 
+            <apex:actionFunction name="ChangeCount" action="{!ChangeCount}"/>
+            <apex:panelGrid >
+                 <apex:outputLabel value="How many files you want to upload?"/>  
+                 <apex:selectList onchange="ChangeCount() ;" multiselect="false" size="1" value="{!FileCount}">  
+                     <apex:selectOption itemLabel="--None--" itemValue=""/>  
+                     <apex:selectOptions value="{!filesCountList}"/>  
+                 </apex:selectList>  
+            </apex:panelGrid>
+            <apex:panelGrid title="Select Files" rendered="{!IF(FileCount != null && FileCount != '', true , false)}">  
+                 <apex:repeat value="{!allFileList}" var="AFL">  
+                    <apex:inputfile value="{!AFL.body}" filename="{!AFL.Name}" />  
+                 </apex:repeat>  
+            </apex:panelGrid> 
+            <apex:panelGrid rendered="{!showlist}">
+            <apex:pageblockTable value="{!lstAttachments }" var="attach">
+                <apex:column value="{!attach.Name}"/>
+                <apex:column value="{!attach.Description}"/>
+            </apex:pageblockTable>
+            </apex:panelGrid> 
+          </apex:pageBlock>
+      </apex:pageBlock>
+   </apex:form>
+</apex:page>

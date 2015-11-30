@@ -1,0 +1,38 @@
+<apex:page standardController="Contact" extensions="MultipleUploadController">  
+    <apex:form >  
+        <apex:pageBlock title="Upload Multiple Attachment to Object" >  
+        
+            <apex:pageBlockButtons >  
+                <apex:commandButton value="Upload"  action="{!SaveAttachments}" status="actStatusId" />
+                <apex:actionStatus id="actStatusId" >
+                <apex:facet name="start" >
+                  <img src="/img/loading.gif" />                    
+                </apex:facet>
+                </apex:actionStatus>  
+            </apex:pageBlockButtons>
+             <apex:pageBlocksection > 
+            <apex:pageMessages id="MSG"/>  
+            <apex:actionFunction name="ChangeCount" action="{!ChangeCount}"/>
+            
+            <apex:panelGrid >
+                    <apex:outputLabel value="How many files you want to upload?"/>  
+                    <apex:selectList onchange="ChangeCount() ;" multiselect="false" size="1" value="{!FileCount}">  
+                        <apex:selectOption itemLabel="--None--" itemValue=""/>  
+                        <apex:selectOptions value="{!filesCountList}"/>  
+                    </apex:selectList>  
+            </apex:panelGrid>
+            <apex:panelGrid title="Select Files" rendered="{!IF(FileCount != null && FileCount != '', true , false)}">  
+                <apex:repeat value="{!allFileList}" var="AFL">  
+                    <apex:inputfile value="{!AFL.body}" filename="{!AFL.Name}" />  
+                </apex:repeat>  
+            </apex:panelGrid> 
+            <apex:panelGrid rendered="{!showlist}">
+            <apex:pageblockTable value="{!lstAttachments }" var="attach">
+                <apex:column value="{!attach.Name}"/>
+                <apex:column value="{!attach.Description}"/>
+            </apex:pageblockTable>
+            </apex:panelGrid>  
+               </apex:pageBlocksection>
+        </apex:pageBlock>  
+    </apex:form>  
+</apex:page>

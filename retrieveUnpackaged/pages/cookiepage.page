@@ -1,0 +1,16 @@
+<apex:page controller="CookiesClass" id="pgid">
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
+    <script>
+        function setCookies(name){
+            var subId=document.getElementById("pgid:frmid:cookieName").value
+            var curdate = new Date();
+            curdate.setMonth(curdate.getMonth() + 9);
+            cookieExpires = curdate.toUTCString();
+            final_cookie =  encodeURIComponent(subId) + ";expires_on = " + cookieExpires;
+            document.cookie = apex__final_cookie;
+        } 
+    </script>
+    <apex:form id="frmid" style="background-color:white;border-color:#555;">
+        Name<apex:inputText value="{!inputCookie}" label="Name" id="cookieName"  onkeypress="setCookies(this.id)" />
+   </apex:form>
+</apex:page>

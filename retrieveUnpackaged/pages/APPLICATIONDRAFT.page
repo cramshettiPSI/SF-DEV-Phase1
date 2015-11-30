@@ -1,0 +1,129 @@
+<apex:page STAndardController="Application3__c" title="New Application" extensions="Draft1" sidebar="False">
+    <apex:form id="theForm">
+    <apex:message />
+    <apex:pageBlock title="Application Edit" mode="edit">
+            <apex:pageBlockButtons >
+    <apex:commandButton value="Save" action="{!Save}"/>
+     <apex:commandButton value="SaveAsDraft" action="{!SaveAsDraft}"/>           
+     <apex:commandButton value="Cancel" action="{!cancel}"/>
+                </apex:pageBlockButtons>
+ <apex:pageBlockSection collapsible="true" Title="Applicant Information" columns="2">
+  <apex:inputField value="{!Application3__c.NOFA_RFP__c}"/> 
+    <apex:inputField value="{!Application3__c.NOFA_Name__c}"/>
+ <!--<apex:inputField value="{!Application3__c.Name}" required="true"/>-->
+              <apex:outputField value="{!Application3__c.Type_of_Submission__c}"  style="width:38%;"/>
+              
+              <apex:inputField value="{!Application3__c.Date_Received__c}" required="false"/>
+               <apex:inputField value="{!Application3__c.Type_of_Application__c}" required="false" style="width:36%;"/>
+            
+            
+        <!-- <apex:selectList value="{!Application3__c.Type_of_Application__c}" multiselect="false" size="1" required="True">
+           <apex:selectOption itemValue="None" itemLabel="--None--"/>
+                <apex:selectOption itemValue="new" itemLabel="New"/>
+                <apex:selectOption itemValue="continuation" itemLabel="Continuation"/>
+                <apex:selectOption itemValue="Revision" itemLabel="Revision"/>
+            </apex:selectList>
+                      <apex:selectList value="{!Application3__c.Option__c}" multiselect="false" size="1" required="True">
+           <apex:selectOption itemValue="Increase Award" itemLabel="A. Increase Award"/>
+                <apex:selectOption itemValue="BDecrease Award" itemLabel="B. Decrease Award"/>
+                <apex:selectOption itemValue="Increase Duration" itemLabel="C.Increase Duration"/>
+                <apex:selectOption itemValue="Decrease Duration" itemLabel="D. Decrease Duration"/>
+                 <apex:selectOption itemValue="Other" itemLabel="E. Other (specify)"/>
+                  </apex:selectList>-->
+ <apex:inputField value="{!Application3__c.State_Application_Identifier__c}" style="width:38%;"/>
+ <apex:inputField value="{!Application3__c.Option__c}" style="width:32%;"/>
+
+ <apex:inputField value="{!Application3__c.Applicant_Delinquent_on_any_Federal_Debt__c}" style="width:38%;"/>
+  <apex:inputTextarea value="{!Application3__c.Additional_Information__c}" style="width: 150px; height: 25px"/>
+  <apex:inputField value="{!Application3__c.If_Yes_provide_your_explination_here__c}" style="width: 150px; height: 25px"/>
+ <apex:outputField value="{!Application3__c.Review_by_State_Under_Executive_Order__c}" style="width:38%;"/>
+ <apex:inputField value="{!Application3__c.Date_Received_by_State__c}"/>
+ 
+ <!--<apex:inputField value="{!Application3__c.Applicant_Identifier__c}"/> -->
+ <!--<apex:inputField value="{!Application3__c.Project__c}"/>  -->
+ <!--<apex:inputField value="{!Application3__c.Status__c}" style="width:38%;"/> -->
+  </apex:pageBlockSection>
+  
+  <!--shamli-->
+   
+   <!--  <apex:pageBlockSection title="Organization Information" columns="2">
+ 
+<apex:inputField value="{!Application3__c.Street_1__c}" required="true"/>
+<apex:inputField value="{!Application3__c.Street_2__c}" required="false"/>
+<apex:inputField value="{!Application3__c.City__c}" required="true"/>
+<apex:inputField value="{!Application3__c.State__c}" required="false"/>
+<apex:inputField value="{!Application3__c.Zip_Postal_Code__c}" required="true"/>
+<apex:inputField value="{!Application3__c.Country__c}" required="false"/>
+<apex:inputField value="{!Application3__c.Department_Name__c}" required="false"/>
+<apex:inputField value="{!Application3__c.Division_Name__c}" required="false"/>
+</apex:pageBlockSection>
+ -->
+<apex:pageBlockSection title="Organization Contact Information" columns="2">
+<apex:inputField value="{!Application3__c.Prefix__c}"/ >
+<apex:inputField value="{!Application3__c.Organizational_Affiliation__c}" required="false"/>
+<apex:inputField value="{!Application3__c.First_Name__c}" required="false"/>
+<apex:inputField value="{!Application3__c.Title__c}" required="false" />
+<apex:inputField value="{!Application3__c.Middle_Name__c}" required="false"/>
+<apex:inputField value="{!Application3__c.Telephone_Number__c}" required="false"/>
+<apex:inputField value="{!Application3__c.Last_Name__c}" required="false"/>
+<apex:inputField value="{!Application3__c.Email__c}" required="false"/>
+<apex:inputField value="{!Application3__c.Suffix__c}" required="false"/>
+
+
+
+</apex:pageBlockSection>
+
+ <apex:pageBlockSection collapsible="true" Title="Project/Program Information" columns="1">
+  <!--  <apex:inputField value="{!Application3__c.CFDA_Number__c}"/>
+      
+        <apex:inputField value="{!Application3__c.NOFA_Due_Date__c}"/>
+       -->
+      
+       
+      
+         
+  
+ <!-- <apex:inputField value="{!Application3__c.Date__c}"/> -->
+ <!-- <apex:inputField value="{!Application3__c.Program_Director__c}" style="width: 143px; height: 23px"/> -->
+ <!-- <apex:inputField value="{!Application3__c.State_Application_Identifier__c}"/>-->
+  <!--<apex:inputField value="{!Application3__c.Program_Site_URL__c}"/> -->
+  
+  <apex:inputField value="{!Application3__c.Areas_Affected_by_Project_Cities_Coutn__c}" style="width: 280px; height: 65px"/>
+ 
+  <!--<apex:inputField value="{!Application3__c.Project_Program_Title__c}" style="width:38%;"/>-->
+  <apex:inputField value="{!Application3__c.Proposed_Start_Date__c}"/>
+  <apex:inputField value="{!Application3__c.Proposed_End_Date__c}"/>
+  
+  
+   </apex:pageBlockSection>
+  
+
+<!--
+<apex:pageBlockSection title="Type of Applicant" columns="1">
+<apex:inputField value="{!Application3__c.Type_of_Applicant__c}" required="false" style="width:18%;"/>
+<apex:inputField value="{!Application3__c.Descriptive_Title_of_Applicant_s_Project__c}" required="false"/>
+</apex:pageBlockSection> -->
+  <!--   
+ <apex:pageBlockSection title="Competition Identification Number/Title" columns="2">
+<apex:inputField value="{!Application3__c.Community_Advisory_Name_and_Addresses__c}" required="false" style="width:50%;"/>
+<apex:inputField value="{!Application3__c.Funding_Opportunity_Title__c}" required="false"/>
+</apex:pageBlockSection>
+     
+ <apex:pageBlockSection title="Proposed Project" columns="2">
+<apex:inputField value="{!Application3__c.Start_Date__c}" required="true"/>
+<apex:inputField value="{!Application3__c.End_Date__c}" required="true"/>
+</apex:pageBlockSection>
+
+
+<apex:pageBlockSection title="Estimated Funding" columns="2">
+<apex:inputField value="{!Application3__c.Federal__c}" required="true"/>
+<apex:inputField value="{!Application3__c.Applicant1__c}" required="true"/>
+<apex:inputField value="{!Application3__c.State1__c}" required="true"/>
+<apex:inputField value="{!Application3__c.Local__c}" required="true"/>
+<apex:inputField value="{!Application3__c.Program_Income__c}" required="true"/>
+</apex:pageBlockSection>
+-->
+
+</apex:pageBlock> 
+ </apex:form>
+  </apex:page>

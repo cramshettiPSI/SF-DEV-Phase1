@@ -1,0 +1,12 @@
+<apex:page controller="projectController">
+<apex:form >
+<apex:pageBlock title="My Projects">
+<apex:pageBlockSection title="My Content Section" columns="2">
+<apex:pageBlockSectionItem >
+<apex:outputLabel value="Lookup to an project" for="theLookup"/>
+<apex:inputField id="theLookup" value="{!Project.Name}"/>
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

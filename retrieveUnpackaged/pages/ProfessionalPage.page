@@ -1,0 +1,65 @@
+<apex:page standardController="Education__c" extensions="MultiAddEducation" id="thePage" sidebar="false">
+    <apex:pageBlock >
+    
+    </apex:pageBlock>
+    <apex:form >
+        <apex:pageblock id="pb" title="Expert Reviewer Application"> 
+        
+        <apex:pageblockButtons location="top" >
+                <apex:commandButton value="Save" action="{!save}" />   
+                <apex:commandbutton value="Save as a Draft" action="{!Save}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageblockButtons>
+            <apex:pageblock id="pb1" title="Education History">
+                <apex:pageBlocksection >
+                    <apex:panelGrid title="SPD">
+                            <apex:facet name="header">Highest level of Education</apex:facet>
+                            <apex:inputfield value="{!Education__c.Highest_Level_of_Education__c}"/>
+                    </apex:panelGrid>
+                        <apex:panelGrid columns="2" title="SPD">
+                
+                    <apex:repeat value="{!lstInner}" var="e1" id="therepeat">
+                        <apex:panelGrid columns="3">
+                        <apex:panelGrid title="SPD">                
+                            <apex:facet name="header">College/University</apex:facet>
+                            <apex:inputfield value="{!e1.acct.College_University__c}"/>
+                        </apex:panelGrid>
+                        <apex:panelGrid title="SPD">
+                            <apex:facet name="header">Degree Earned</apex:facet>
+                            <apex:inputfield value="{!e1.acct.Degree_Earned__c}"/>
+                        </apex:panelGrid>
+                        <apex:panelGrid title="SPD">
+                            <apex:facet name="header">Organization Type</apex:facet>
+                            <apex:inputfield value="{!e1.acct.Organization_Type__c}"/>
+                        </apex:panelGrid>
+                        </apex:panelGrid>
+                        <apex:panelGrid title="SPD" columns="2">
+                        <apex:panelGrid title="SPD">
+                            <apex:facet name="header">From</apex:facet>
+                            <apex:inputfield value="{!e1.acct.From__c}"/>
+                        </apex:panelGrid>
+                        <apex:panelGrid title="SPD">
+                            <apex:facet name="header">To</apex:facet>
+                            <apex:inputfield value="{!e1.acct.To__c}"/> 
+                        </apex:panelGrid> <br/> 
+                         </apex:panelGrid>    
+                        <apex:panelGrid columns="3">
+                            <apex:commandButton value="Add" action="{!Add}" rerender="pb1"/>   
+                            <apex:commandbutton value="Save" action="{!Save}"/>
+                            <apex:commandButton value="Delete" action="{!Del}" rerender="pb1">
+                            <apex:param name="rowToBeDeleted" value="{!e1.recCount}" assignTo="{!selectedRowIndex}"></apex:param>
+                            </apex:commandButton>
+                        </apex:panelGrid>
+                        </apex:repeat>
+                </apex:panelGrid><br/> 
+                </apex:pageBlocksection>
+            </apex:pageblock>         
+            
+            
+        </apex:pageblock>
+    </apex:form> 
+   <!-- <apex:include pageName="MultiFileUpload"/>
+    <apex:include pageName="EmploymentHistory"/>-->
+   
+    
+</apex:page>

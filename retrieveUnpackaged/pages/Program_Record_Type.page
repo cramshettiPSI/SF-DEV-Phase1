@@ -1,0 +1,5 @@
+<apex:page standardController="CNCS_Corporate_Program__c">
+<script>
+window.location.replace('/a19/e?retURL=%2Fa19%2Fo&RecordType=012r00000004J8r&ent=01Ir00000008YoQ&nooverride=1');
+</script>
+</apex:page>

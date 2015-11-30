@@ -1,0 +1,30 @@
+<apex:page Standardcontroller="Application3__c" extensions="TestController">
+
+    <apex:form >
+
+        <apex:commandButton value="Recommend for Award" reRender="sectionsPanel" action="{!addSection}" />
+
+        <apex:outputPanel id="sectionsPanel">
+        <apex:pageBlock >
+            
+                <apex:repeat value="{!lstSections}" var="section">
+                    <apex:pageBlockSection title="PageBlock">
+                           <apex:inputField label="Program Officer" value="{!Application3__c.Program_Officer__c}" required="true" />  
+                           <apex:inputField value="{!Application3__c.Senior_Program_Officer__c}" required="true"/>
+                           <apex:inputField value="{!Application3__c.Program_Office_Director__c}" required="true"/>
+                           <apex:inputField value="{!Application3__c.Grants_Officer__c}" required="true"/>
+                           <apex:inputField value="{!Application3__c.Senior_Grants_Officer__c}" required="true"/>
+                           <apex:inputField value="{!Application3__c.Executive_Officer__c}" required="true"/>   
+                           <apex:inputField value="{!Application3__c.Ex_Officer_Cost_Share__c}" required="true"/>
+                           <apex:inputField value="{!Application3__c.Recommended_Award_Amount__c}" required="true"/> 
+                           <apex:inputField value="{!Application3__c.Total_Recommended_MSYs__c}" required="true"/> 
+                           <apex:inputField value="{!Application3__c.Issue_Area__c}" required="true"/>            
+                  </apex:pageBlockSection>
+                </apex:repeat>
+                </apex:pageBlock>
+                   </apex:outputPanel>
+                   
+
+    </apex:form>
+
+</apex:page>

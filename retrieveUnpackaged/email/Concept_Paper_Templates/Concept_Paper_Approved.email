@@ -1,0 +1,7 @@
+Dear {!User.Name}, 
+
+Concept paper has been approved. 
+{!Application3__c.Comments__c}
+
+Thank you, 
+Corporation for National and Community Service

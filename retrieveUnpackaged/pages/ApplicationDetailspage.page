@@ -1,0 +1,132 @@
+<apex:page standardController="Application3__c" extensions="Withdrawapplication" tabStyle="Application3__c" >
+<apex:messages />
+<script type="text/javascript">
+function withdraw(){
+var withdrawal = prompt("You are about to withdraw this Grant Application.Once doing so, this application will no longer be in consideration for this competition.  If you do not intend to withdraw this application, please click the Cancel button.If not please fill the withdraw justification comment box", " ");
+alert('$$$$$$$%%%');
+SaveFunc(withdrawal);
+
+}
+
+</script>
+<style>
+.fewerMore { display: none;}
+</style>
+
+<apex:form id="frm">
+<apex:actionFunction name="SaveFunc" action="{!withdrawfunc}" rerender="frm" > 
+     <apex:param name="Withdraw_Justification" value="" assignTo="{!Withdrawapp}" />
+</apex:actionFunction> 
+
+<apex:pageblock id="CustomList" title="Application Detail View" mode="maindetail">
+<apex:pageBlockButtons >
+    <apex:commandButton value="Edit" action="{!Edit}" disabled="{!applicationInput.Status__c=='Submitted' || applicationInput.Status__c=='Withdraw'}"/>
+    <apex:commandButton value="Delete" action="{!Delete}"/>
+  <apex:commandButton value="Performance Measures" onclick="window.open('apex/pmacTest?scontrolCaching=1&id={!Application3__c.id}','_blank','width=1500,height=800,location=no,resizable=yes,toolbar=no,status=no,menubar=no,scrollbars=1', 1);"/>
+      <apex:commandButton value="Re-Open" action="{!reopen}" disabled="{!applicationInput.Status__c=='Withdraw'}"  onclick="return confirm('Are you sure?');"/> 
+       <apex:commandButton value="Withdraw" onclick="return withdraw();" disabled="{applicationInput.Status__c!=='Submitted'}"/> 
+        <!-- New Requirement on 12 Aug 15-->
+            <apex:commandButton value="Recommended for Funding" action="{!RecomForCNCS}" disabled="{!IF($Profile.Name !='state commission', true , false)}" /><!--disabled="{!IF($Profile.Name =='state commission', true , false)}"  -->
+            <apex:commandButton value="On-Hold For Formula" action="{!HldforFormula}" disabled="{!IF($Profile.Name !='state commission', true , false)}"/>
+            <apex:commandButton value="Reject" action="{!Reject5}" disabled="{!IF($Profile.Name !='state commission', true , false)}"/>
+            <!-- Ends Here -->
+</apex:pageBlockButtons>
+<apex:pageBlockSection title="Applicant Information" id="pbsec" collapsible="False" Columns="2" >
+ <apex:outputField value="{!Application3__c.NOFA_RFP__c}" />
+  <apex:outputField value="{!Application3__c.NOFA_Name__c}" />
+   <apex:outputField value="{!Application3__c.Type_of_Submission__c}" />
+   <apex:outputField value="{!Application3__c.Date_Received__c}" />
+    <apex:outputField value="{!Application3__c.Type_of_Application__c}" />
+      <apex:outputField value="{!Application3__c.State_Application_Identifier__c}" />
+       <apex:outputField value="{!Application3__c.Option__c}" />
+        <apex:outputField value="{!Application3__c.Applicant_Delinquent_on_any_Federal_Debt__c}" />
+         <apex:outputField value="{!Application3__c.Additional_Information__c}" />
+          <apex:outputField value="{!Application3__c.If_Yes_provide_your_explination_here__c}" />
+           <apex:outputField value="{!Application3__c.Review_by_State_Under_Executive_Order__c}" />
+            <apex:outputField value="{!Application3__c.Date_Received_by_State__c}" />
+             <apex:outputField value="{!Application3__c.Status__c}" />
+              <apex:outputField value="{!Application3__c.Withdraw_Justification__c}" />
+              <apex:outputField value="{!Application3__c.Legacy_App_ID__c}" />              
+                    <apex:outputField value="{!applicationInput.Application_Feedback_Summary__c}" />   
+    </apex:pageBlockSection> 
+            <apex:pageBlockSection title="Organization Contact Information" collapsible="False" Columns="2">
+             <apex:outputField value="{!Application3__c.Prefix__c}" />
+              <apex:outputField value="{!Application3__c.Organizational_Affiliation__c}" />
+               <apex:outputField value="{!Application3__c.First_Name__c}" />
+                <apex:outputField value="{!Application3__c.Title__c}" />
+                 <apex:outputField value="{!Application3__c.Middle_Name__c}" />
+                  <apex:outputField value="{!Application3__c.Telephone_Number__c}" />
+                   <apex:outputField value="{!Application3__c.Last_Name__c}" />
+                    <apex:outputField value="{!Application3__c.Email__c}" />
+     </apex:pageBlockSection> 
+     <apex:pageBlockSection title="Project/Program Information" collapsible="False" Columns="2">   
+       <apex:outputField value="{!Application3__c.Project__c}" /> 
+        <apex:outputField value="{!Application3__c.Areas_Affected_by_Project_Cities_Coutn__c}" /> 
+        <apex:outputField value="{!Application3__c.Proposed_Start_Date__c}" /> 
+        <apex:outputField value="{!Application3__c.Proposed_End_Date__c}" />    
+         </apex:pageBlockSection>    
+           <apex:pageBlockSection title="Foster Grandparents Only" collapsible="False" Columns="2" rendered="{!Application3__c.NOFA_RFP__r.Foster_Grandparents_Only__c}">  
+                     <apex:outputField value="{!Application3__c.Documents_Foster_Grandparents_Only__c}" rendered="{!Application3__c.NOFA_RFP__r.Foster_Grandparents_Only__c}"/>
+             </apex:pageBlockSection>
+             <apex:pageBlockSection title="RSVP Only" collapsible="False" Columns="2" rendered="{!Application3__c.NOFA_RFP__r.RSVP_Only__c}">   
+                      <apex:outputField value="{!Application3__c.Documents_RSVP_Only__c}" rendered="{!Application3__c.NOFA_RFP__r.RSVP_Only__c}"/> 
+                       <apex:outputField value="{!Application3__c.of_Unduplicated_Volunteers__c}" rendered="{!Application3__c.NOFA_RFP__r.RSVP_Only__c}"/> 
+          </apex:pageBlockSection>
+          
+           <apex:pageBlockSection collapsible="true" Title="Narrative" columns="2">
+        <apex:outputField value="{!applicationInput.Program_Design__c}" rendered="{!Application3__c.NOFA_RFP__r.Program_Design__c}"/>
+      <apex:outputField value="{!applicationInput.Program_Management__c}" rendered="{!Application3__c.NOFA_RFP__r.Program_Management__c}"/>
+       <apex:outputField value="{!applicationInput.Evaluation_Summary_or_Plan__c}" rendered="{!Application3__c.NOFA_RFP__r.Evaluation_Summary_of_Plan__c}"/>
+       <apex:outputField value="{!applicationInput.Recruitment_and_Development__c}" rendered="{!Application3__c.NOFA_RFP__r.Recruitment_and_Development__c}"/>
+       <apex:outputField value="{!applicationInput.Strengthen_Communities__c}" rendered="{!Application3__c.NOFA_RFP__r.Strengthening_Communities__c}"/>
+       <apex:outputField value="{!applicationInput.Amendment_Justification__c}" rendered="{!Application3__c.NOFA_RFP__r.Amendment_Justification__c}"/>
+     
+       <apex:outputField value="{!applicationInput.Continuation_Changes__c}" rendered="{!Application3__c.NOFA_RFP__r.Continuation_Changes__c}"/>
+       <apex:outputField value="{!applicationInput.Clarification_Summary__c}" rendered="{!Application3__c.NOFA_RFP__r.Clarification_Summary__c}"/>
+       <apex:outputField value="{!applicationInput.Cost_Effectiveness_and_Budget_Adequacy_C__c}" rendered="{!Application3__c.NOFA_RFP__r.Cost_Effectiveness_and_Budget_Adequacy__c}"/>
+      -- <apex:outputField value="{!applicationInput.Organizational_Capability__c}" rendered="{!Application3__c.NOFA_RFP__r.Organizational_Capability__c}"/>
+       <apex:outputField value="{!applicationInput.Executive_Summary__c}" rendered="{!Application3__c.NOFA_RFP__r.Executive_Summary__c}"/>
+      <!-- <apex:outputField value="{!applicationInput.Leadership_and_Team__c}" rendered="{!Application3__c.NOFA_RFP__r.Leadership_and_Team__c}"/>-->
+       <apex:outputField value="{!applicationInput.Intermediary_Justification__c}" rendered="{!Application3__c.NOFA_RFP__r.Intermediary_Justification__c}"/>
+       <apex:outputField value="{!applicationInput.Need__c}" rendered="{!Application3__c.NOFA_RFP__r.Need__c}"/>
+       <apex:outputField value="{!applicationInput.Summary_of_Accomplishments__c}" rendered="{!Application3__c.NOFA_RFP__r.Summary_of_Accomplishments__c}"/>
+      <!-- <apex:outputField value="{!applicationInput.VISTA_Assignment__c}" rendered="{!Application3__c.NOFA_RFP__r.VISTA_Assignment__c}"/>-->
+         <apex:outputField value="{!applicationInput.Other_Narrative__c}" rendered="{!Application3__c.NOFA_RFP__r.Other__c}"/>
+          </apex:pageBlockSection> 
+          
+           <apex:pageBlockSection collapsible="true" Title="Focus Area and Objectives" columns="2">
+          <apex:outputField value="{!applicationInput.Natural_and_Other_Disasters__c}" rendered="{!Application3__c.NOFA_RFP__r.NCC_for_Focus_Areas_and_Objectives__c}" styleClass="myMultiClass"/>
+        <apex:outputField value="{!applicationInput.Otherobjectives__c}" rendered="{!Application3__c.NOFA_RFP__r.NCC_for_Focus_Areas_and_Objectives__c}"/>
+        <apex:outputField value="{!applicationInput.Energy_Conservation__c}" rendered="{!Application3__c.NOFA_RFP__r.NCC_for_Focus_Areas_and_Objectives__c}" styleClass="myMultiClass"/> 
+       
+                <apex:outputField value="{!applicationInput.If_other_please_specify_Energy__c}" rendered="{!Application3__c.NOFA_RFP__r.NCC_for_Focus_Areas_and_Objectives__c}"/>
+                 <apex:outputField value="{!applicationInput.Environmental_Stewardship_Conservation__c}" rendered="{!Application3__c.NOFA_RFP__r.NCC_for_Focus_Areas_and_Objectives__c}" styleClass="myMultiClass"/>
+                 <apex:outputField value="{!applicationInput.If_other_please_specify_Enivronment__c}" rendered="{!Application3__c.NOFA_RFP__r.NCC_for_Focus_Areas_and_Objectives__c}"/>
+                 <apex:outputField value="{!applicationInput.Infrastructure_Improvement__c}" rendered="{!Application3__c.NOFA_RFP__r.NCC_for_Focus_Areas_and_Objectives__c}" styleClass="myMultiClass"/>
+                 <apex:outputField value="{!applicationInput.If_other_please_specify_Infrastructure__c}" rendered="{!Application3__c.NOFA_RFP__r.NCC_for_Focus_Areas_and_Objectives__c}"/>
+                 <apex:outputField value="{!applicationInput.Urban_and_Rural_Development__c}" rendered="{!Application3__c.NOFA_RFP__r.NCC_for_Focus_Areas_and_Objectives__c}" styleClass="myMultiClass"/>
+                <apex:outputField value="{!applicationInput.If_other_please_specify_Urban__c}" rendered="{!Application3__c.NOFA_RFP__r.NCC_for_Focus_Areas_and_Objectives__c}"/>
+                 <apex:outputField value="{!applicationInput.Education__c}"  rendered="{!Application3__c.NOFA_RFP__r.Other_for_Focus_Areas_and_Objectives__c}" styleClass="myMultiClass"/>
+                 <apex:outputField value="{!applicationInput.If_other_please_specify_Veterns__c}" rendered="{!Application3__c.NOFA_RFP__r.Other_for_Focus_Areas_and_Objectives__c}"/>
+                <apex:outputField value="{!applicationInput.Veterans_Military_Families__c}" rendered="{!Application3__c.NOFA_RFP__r.Other_for_Focus_Areas_and_Objectives__c}" styleClass="myMultiClass"/>
+                <apex:outputField value="{!applicationInput.If_other_please_specify_Veterns__c}" rendered="{!Application3__c.NOFA_RFP__r.Other_for_Focus_Areas_and_Objectives__c}"/>
+                <apex:outputField value="{!applicationInput.Disaster_Services__c}" rendered="{!Application3__c.NOFA_RFP__r.Other_for_Focus_Areas_and_Objectives__c}" styleClass="myMultiClass"/>
+                <apex:outputField value="{!applicationInput.Environmental_Stewardship__c}" rendered="{!Application3__c.NOFA_RFP__r.Other_for_Focus_Areas_and_Objectives__c}"/>
+                <apex:outputField value="{!applicationInput.If_other_please_specify_Enivironment_Ste__c}" rendered="{!Application3__c.NOFA_RFP__r.Other_for_Focus_Areas_and_Objectives__c}"/>
+                <apex:outputField value="{!applicationInput.Healthy_Futures__c}" rendered="{!Application3__c.NOFA_RFP__r.Other_for_Focus_Areas_and_Objectives__c}" styleClass="myMultiClass"/>
+                <apex:outputField value="{!applicationInput.If_other_please_specify_Health__c}" rendered="{!Application3__c.NOFA_RFP__r.Other_for_Focus_Areas_and_Objectives__c}"/>
+                <apex:outputField value="{!applicationInput.Capacity_Building__c}" rendered="{!Application3__c.NOFA_RFP__r.Other_for_Focus_Areas_and_Objectives__c}" styleClass="myMultiClass"/>
+                <apex:outputField value="{!applicationInput.Economic_Opportunities__c}" rendered="{!Application3__c.NOFA_RFP__r.Other_for_Focus_Areas_and_Objectives__c}" styleClass="myMultiClass"/>
+                <apex:outputField value="{!applicationInput.Capacity_Building__c}" rendered="{!Application3__c.NOFA_RFP__r.Other_for_Focus_Areas_and_Objectives__c}" styleClass="myMultiClass"/>
+                <apex:outputField value="{!applicationInput.If_other_please_specify_Economic__c}" rendered="{!Application3__c.NOFA_RFP__r.Other_for_Focus_Areas_and_Objectives__c}"/>
+              </apex:pageBlockSection>
+          
+          
+ </apex:pageblock>
+</apex:form>
+
+
+<apex:relatedList id="attachmentlist" list="Attachments__r" pageSize="10"/> 
+
+
+</apex:page>
